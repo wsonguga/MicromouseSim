@@ -39,6 +39,67 @@ if (!mouse) {
 	mouse = {};
 }
 
+var mouse_new = [];
+origin_pos = [[0, 0], [0, 15], [15, 0], [15, 15]];
+mouse_new[0] = new Mouse(origin_pos[0]);
+mouse_new[1] = new Mouse(origin_pos[1]);
+mouse_new[2] = new Mouse(origin_pos[2]);
+mouse_new[3] = new Mouse(origin_pos[3]);
+
+function Mouse(pos) {
+	var cMouseX;	// mouse x pos in cells
+	var cMouseY;	// mouse y pos in cells
+	var pMouseX;	// mouse x pos in pixels
+	var pMouseY;	// mouse y pos in pixels
+	var tpMouseX;	// target x pos in pixels
+	var tpMouseY;	// target y pos in pixels
+	var mouseDir;	// "N", "E", "S", or "W"
+	var aMouseDir;	// the angle direction of mouse
+	var taMouseDir;	// the target angle direction of mouse
+	var mRadius;	// mouse radius.
+	var turnDir;	// "R"ight, "L"eft, "N"one.
+
+	this.reset = function() {
+		if (driver.load) {
+			driver.load();
+		}
+
+		mouse.home();
+		mouse.memClear();
+	};
+	this.x = function() {
+		return this.cMouseX;
+	};
+
+	this.y = function() {
+		return cMouseY;
+	};
+
+	this.heading = function() {
+		return mouseDir;
+	};
+
+	this.home = function() {
+		mouse.stop();
+		eraseMouse();
+		setHomePosition();
+		clearTimer();
+		drawMouse();
+		moveCount = 0;
+	};
+
+	this.isHome = function() {
+		if (cMouseX === 0 &&
+			cMouseY === 15) { // &&
+			// mouseDir === "N") {
+
+			return true;
+		} else {
+			return false;
+		}
+	};
+}
+
 // start closure
 (function () {
 
@@ -557,6 +618,30 @@ mouse.loadMaze = function(maze_selp) {
 	});
 
 
+};
+}
+
+if (typeof mouse.updateCoordinates !== 'function') {
+mouse.updateCoordinates = function() {
+	setInterval(function(){
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				eraseMouse();
+				var strCoordinates = this.responseText;
+				var coordinates = strCoordinates.split(',');
+				cMouseX = parseInt(coordinates[0]);
+				cMouseY = parseInt(coordinates[1]);
+				pMouseX = cell2px();
+				pMouseY = cell2py();
+				tpMouseX = pMouseX;
+				tpMouseY = pMouseY;
+				drawMouse();
+			}
+		};
+		xhttp.open("GET", "queryRobot.php", true);
+		xhttp.send();
+	}, 1000);
 };
 }
 

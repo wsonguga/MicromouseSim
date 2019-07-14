@@ -139,14 +139,19 @@ Speed <div id="slider"></div>
 </select>
 </div>
 
-<textarea id="driver_code" rows=30> 
-</textarea>
-
 <div id="code_controls_div">
 <!--
 <button id="download" type="button">*Download and Reset Mouse</button>
 -->
 </div>
+
+<textarea id="driver_codemirror" rows=30>
+	
+</textarea>
+
+<textarea id="driver_code" style="display:none;" rows=30>
+	
+</textarea>
 
 </form>
 
@@ -159,6 +164,9 @@ Speed <div id="slider"></div>
 <script type="text/javascript" src="jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="jquery-ui-1.8.12.custom.min.js"></script>
 <script type="text/javascript" src="maze.js"></script>
+<script src="lib/codemirror.js"></script>
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="mode/python/python.js"></script>
 
 <script type="text/javascript">
 jQuery(function() {
@@ -174,42 +182,29 @@ jQuery(function() {
 		}
 	);
 
-	/*
-	$('#download').click(
-		function(event) {
-			var code = $("#driver_code").val();
-			jQuery.globalEval(code);
-			mouse.loadDriver(driver);
-			$("#download").html("Download and Reset Mouse");
-			$("#home").attr("disabled","");
-			$("#start_stop").attr("disabled","");
-			$("#step").attr("disabled","");
-		}
-	);
-	*/
-
 	$('#start_stop').click(
 		function(event) {
-			var code = $("#driver_code").val();
-			if ($('#start_stop').html() === 'Download') {
-				jQuery.globalEval(code);
-				mouse.loadDriver(driver);
-				$("#download").html("Download and Reset Mouse");
-				$("#home").attr("disabled","");
-				$("#start_stop").attr("disabled","");
-				$("#step").attr("disabled","");
-				$("#reset").attr("disabled","");
-				$('#start_stop').html('Start');
-				return;
-			}
-			if ($('#start_stop').html() === 'Start') {
-				mouse.start();
-				$('#start_stop').html('Stop');
+			mouse.updateCoordinates();
+			// var code = $("#driver_code").val();
+			// if ($('#start_stop').html() === 'Download') {
+			// 	jQuery.globalEval(code);
+			// 	mouse.loadDriver(driver);
+			// 	$("#download").html("Download and Reset Mouse");
+			// 	$("#home").attr("disabled","");
+			// 	$("#start_stop").attr("disabled","");
+			// 	$("#step").attr("disabled","");
+			// 	$("#reset").attr("disabled","");
+			// 	$('#start_stop').html('Start');
+			// 	return;
+			// }
+			// if ($('#start_stop').html() === 'Start') {
+			// 	mouse.start();
+			// 	$('#start_stop').html('Stop');
 
-			} else {
-				mouse.stop();
-				$('#start_stop').html('Start');
-			}
+			// } else {
+			// 	mouse.stop();
+			// 	$('#start_stop').html('Start');
+			// }
 		}
 	);
 
@@ -244,12 +239,6 @@ jQuery(function() {
 	);
 
 	// Slider
-	/*
-	$('#slider').slider({
-		range: true,
-		values: [17, 67]
-	});
-	*/
 	$('#slider').slider({
 		min:1, 
 		max:12,
@@ -269,10 +258,10 @@ jQuery(function() {
 	$("#step").attr("disabled","disabled");
 	$("#reset").attr("disabled","disabled");
 
-	// load driver code from template
-	var template_file = "templates/" + 
-		$('#driver_sel option:selected').val() + ".js";
-	$('#driver_code').load(template_file);
+	//load driver code from template
+	// var template_file = "templates/" + 
+	// 	$('#driver_sel option:selected').val() + ".js";
+	// $('#driver_code').load(template_file);
 
 	// select random maze
 	//var last_opt = $('#maze_sel option:last').val();
@@ -287,6 +276,23 @@ jQuery(function() {
 
 	var maze_height = $("canvas#maze").height() + 8;
 	$("#driver_div").height(maze_height);
+
+	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('driver_codemirror'), {
+	  	mode: {	name: "python",
+               	version: 3,
+               	singleLineStringErrors: false,
+			  	lineNumbers: true,
+			  	lineWrapping: true},
+        lineNumbers: true,
+        indentUnit: 4
+	});
+
+	//var template_file = "templates/" + $('#driver_sel option:selected').val() + ".js";
+	var template_file = "templates/strategy_multidfs.py";
+	$('#driver_code').load(template_file, function(){
+		myCodeMirror.setValue($('#driver_code').val());
+		myCodeMirror.setSize("100%", "100%")
+	});
 
 });
 </script>
