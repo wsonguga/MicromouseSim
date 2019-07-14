@@ -25,7 +25,7 @@
 
 <body>
 
-<h2>Micromouse Simulator <a class="small_link" href="https://github.com/bblodget">Source on GitHub</a></h2>
+<h2>Micromouse Simulator <a class="small_link" href="https://github.com/eniacluo/MicromouseSim">Source on GitHub</a></h2>
 
 
 <div id="maze_div">
@@ -116,11 +116,7 @@
 <button id = "reset" type="button" disabled="disabled">Reset</button>
 <button id = "home" type="button" disabled="disabled">Home</button>
 <button id = "start_stop" type="button">Download</button>
-<button id = "step" type="button" disabled="disabled">Step</button>
-</div>
-
-<div id="slider_right">
-Speed <div id="slider"></div>
+<button id = "update" type="button">Update</button>
 </div>
 
 </form>
@@ -131,11 +127,10 @@ Speed <div id="slider"></div>
 <span class="heading">Algorithm</span>
 
 <div class="select">
-<label for="driver_sel">(<a href="https://github.com/bblodget/MicromouseSim/wiki/Mouse-API">Mouse API</a>)</label>
+<label for="driver_sel">(<a href="https://github.com/eniacluo/Micromouse/tree/master/framework">Documentations</a>)</label>
 <select name="driver_sel" id="driver_sel">
-  <option value="right_wall">Right Wall Follower</option>
-  <option value="left_wall">Left Wall Follower</option>
-  <option value="flood_fill" selected="selected">Flood Fill</option>
+  <option value="multidfs" selected="selected">MultiDFS</option>
+  <option value="blank">Blank</option>
 </select>
 </div>
 
@@ -177,14 +172,13 @@ jQuery(function() {
 			$("#start_stop").html("Download");
 			$("#start_stop").attr("disabled","");
 			$("#home").attr("disabled","disabled");
-			$("#step").attr("disabled","disabled");
+			$("#update").attr("disabled","disabled");
 			$("#reset").attr("disabled","disabled");
 		}
 	);
 
 	$('#start_stop').click(
 		function(event) {
-			mouse.updateCoordinates();
 			// var code = $("#driver_code").val();
 			// if ($('#start_stop').html() === 'Download') {
 			// 	jQuery.globalEval(code);
@@ -205,28 +199,43 @@ jQuery(function() {
 			// 	mouse.stop();
 			// 	$('#start_stop').html('Start');
 			// }
+			$.ajax({
+				url:"saveStrategy.php ",
+				type:"POST",
+
+				data:{
+					strategy: myCodeMirror.getValue(),
+				},
+				success:function(response) {
+					$("#start_stop").html(response);
+			    },
+			    error:function() {
+			    	alert("error");
+				}
+
+  			});
 		}
 	);
 
 	$('#maze_sel').change(
 		function(event) {
-			mouse.loadMaze($('#maze_sel option:selected').text());
+			loadMaze($('#maze_sel option:selected').text());
 		}
 	);
 
 	$('#driver_sel').change(
 		function(event) {
-			var template_file = "templates/" + 
-				$('#driver_sel option:selected').val() + ".js";
+			var template_file = "templates/strategy_" + 
+				$('#driver_sel option:selected').val() + ".py";
 			/* This code is not working in Firefox 4
 			 * does not update textarea if textarea has been modified.
 			$('#driver_code').load(template_file);
 			*/
 			// so we change to this version
-			$.get(template_file, function(data) {
-			  $('#driver_code').val(data);
-			},"html");
-			
+			$('#driver_code').load(template_file, function(){
+				myCodeMirror.setValue($('#driver_code').val());
+				myCodeMirror.setSize("100%", "100%")
+			});
 
 			// mouse.loadDriver(driver);
 			//$("#download").html("*Download and Reset Mouse");
@@ -238,40 +247,22 @@ jQuery(function() {
 		}
 	);
 
-	// Slider
-	$('#slider').slider({
-		min:1, 
-		max:12,
-		value: 6,
-		slide: function(event, info) {
-			mouse.setSpeed(16-info.value);
-		}
-	});
-
-	$('#step').click(mouse.step);
+	$('#update').click(updateCoordinates);
 	$('#home').click(mouse.home);
 	$('#reset').click(mouse.reset);
 
 	// value on page load
 	$("#home").attr("disabled","disabled");
-	//$("#start_stop").attr("disabled","disabled");
-	$("#step").attr("disabled","disabled");
 	$("#reset").attr("disabled","disabled");
 
-	//load driver code from template
-	// var template_file = "templates/" + 
-	// 	$('#driver_sel option:selected').val() + ".js";
-	// $('#driver_code').load(template_file);
-
 	// select random maze
-	//var last_opt = $('#maze_sel option:last').val();
 	var last_opt = $('#maze_sel option').size();
 	var rand_maze = Math.floor(Math.random()*last_opt+1)
 	$("#maze_sel option").eq(rand_maze).attr('selected','selected');
 	var maze_sel = $('#maze_sel option:selected').val();
 
 
-	mouse.newMaze($('#start_stop'),maze_sel);
+	newMaze($('#start_stop'), maze_sel);
 	// mouse.loadDriver(driver);
 
 	var maze_height = $("canvas#maze").height() + 8;
@@ -287,12 +278,12 @@ jQuery(function() {
         indentUnit: 4
 	});
 
-	//var template_file = "templates/" + $('#driver_sel option:selected').val() + ".js";
 	var template_file = "templates/strategy_multidfs.py";
 	$('#driver_code').load(template_file, function(){
 		myCodeMirror.setValue($('#driver_code').val());
-		myCodeMirror.setSize("100%", "100%")
+		myCodeMirror.setSize("100%", "auto");
 	});
+
 
 });
 </script>

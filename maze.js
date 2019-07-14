@@ -39,66 +39,231 @@ if (!mouse) {
 	mouse = {};
 }
 
+var cWidth;	// the width of the maze in cells
+var cHeight;	// the height of the maze in cells
+var canvas; // the html5 canvas we draw on
+var ctx;	// the canvas context
+var pCellWidth; // width of a cell in pixels
+var pCellHeight;	// height of a cell in pixels
+
 var mouse_new = [];
 origin_pos = [[0, 0], [0, 15], [15, 0], [15, 15]];
-mouse_new[0] = new Mouse(origin_pos[0]);
-mouse_new[1] = new Mouse(origin_pos[1]);
-mouse_new[2] = new Mouse(origin_pos[2]);
-mouse_new[3] = new Mouse(origin_pos[3]);
+mouse_new[0] = new Mouse(origin_pos[0], "S");
+mouse_new[1] = new Mouse(origin_pos[1], "N");
+mouse_new[2] = new Mouse(origin_pos[2], "S");
+mouse_new[3] = new Mouse(origin_pos[3], "N");
 
-function Mouse(pos) {
-	var cMouseX;	// mouse x pos in cells
-	var cMouseY;	// mouse y pos in cells
-	var pMouseX;	// mouse x pos in pixels
-	var pMouseY;	// mouse y pos in pixels
-	var tpMouseX;	// target x pos in pixels
-	var tpMouseY;	// target y pos in pixels
-	var mouseDir;	// "N", "E", "S", or "W"
-	var aMouseDir;	// the angle direction of mouse
-	var taMouseDir;	// the target angle direction of mouse
-	var mRadius;	// mouse radius.
-	var turnDir;	// "R"ight, "L"eft, "N"one.
+function Mouse(pos, dir) {
+	var mRadius;					// mouse radius.
+	this.origin_pos = pos;
 
-	this.reset = function() {
-		if (driver.load) {
-			driver.load();
-		}
-
-		mouse.home();
-		mouse.memClear();
-	};
 	this.x = function() {
 		return this.cMouseX;
 	};
 
 	this.y = function() {
-		return cMouseY;
+		return this.cMouseY;
 	};
 
 	this.heading = function() {
-		return mouseDir;
+		return this.direction;
 	};
 
-	this.home = function() {
-		mouse.stop();
-		eraseMouse();
-		setHomePosition();
-		clearTimer();
-		drawMouse();
-		moveCount = 0;
-	};
+	this.cell2px = function() {
+		return ((this.cMouseX * pCellWidth) + (pCellWidth/2));
+	}
 
-	this.isHome = function() {
-		if (cMouseX === 0 &&
-			cMouseY === 15) { // &&
-			// mouseDir === "N") {
+	this.cell2py = function() {
+		return ((this.cMouseY * pCellHeight) + (pCellHeight/2));
+	}
 
-			return true;
-		} else {
-			return false;
+	this.head2angle = function() {
+		switch(this.direction) {
+			case "N" : return -90;
+			case "E" : return 0;
+			case "S" : return 90;
+			case "W" : return 180;
 		}
-	};
+		return 0;
+	}
+
+	this.setHomePosition = function() {
+		this.cMouseX = this.origin_pos[0];
+		this.cMouseY = this.origin_pos[1];
+		this.pMouseX = this.cell2px();
+		this.pMouseY = this.cell2py();
+		this.aMouseDir = this.head2angle();
+	}
+
+	this.erase = function() {
+		var px, py;
+
+		px = this.pMouseX - (pCellWidth-2)/2;
+		py = this.pMouseY - (pCellHeight-2)/2;
+
+		ctx.clearRect(px, py, pCellWidth-3, pCellHeight-3);
+	}
+
+	this.draw = function() {
+		ctx.beginPath();
+		ctx.arc(this.pMouseX, this.pMouseY, this.mRadius, rads(this.aMouseDir),
+			rads(this.aMouseDir + 360),false); // Outer circle
+		ctx.lineTo(this.pMouseX, this.pMouseY);
+		ctx.closePath();
+		ctx.strokeStyle = "#000";
+		ctx.stroke();
+	}
+
+	this.updateCoordinates = function(x, y) {
+		this.erase();
+		this.cMouseX = x;
+		this.cMouseY = y;
+		this.pMouseX = this.cell2px();	// mouse x pos in pixels
+		this.pMouseY = this.cell2py();	// mouse y pos in pixels
+		this.draw();
+	}
+
+	this.cMouseX = pos[0];			// mouse x pos in cells
+	this.cMouseY = pos[1];			// mouse y pos in cells
+	this.pMouseX = this.cell2px();	// mouse x pos in pixels
+	this.pMouseY = this.cell2py();	// mouse y pos in pixels
+	this.direction = dir;			// "N", "E", "S", or "W"
+	this.aMouseDir = this.head2angle();
 }
+
+function newMaze(ss_button, maze_sel) {
+	cWidth = 16;	
+	cHeight = 16;	
+
+	canvas = document.getElementById("maze");
+	ctx = canvas.getContext("2d");
+
+	pWidth = canvas.width;
+	pHeight = canvas.height;
+
+	pCellWidth = pWidth / cWidth;
+	pCellHeight = pHeight / cHeight;
+
+	// init mouse starting mostion
+	// bottom left square
+	for (var i = 0; i < mouse_new.length; i++) {
+		mouse_new[i].setHomePosition();
+		if (pCellWidth > pCellHeight) {
+			mouse_new[i].mRadius = Math.floor(pCellHeight/2) - 5;
+		} else {
+			mouse_new[i].mRadius = Math.floor(pCellWidth/2) - 5;
+		}
+	}
+	loadMaze(maze_sel);
+}
+
+function loadMaze(maze_selp) {
+	var maze_json = "mazes_json/" + maze_selp + ".json";
+
+	maze_sel = "loading";
+
+	// change menu selection
+	$("#maze_sel").val(maze_selp).attr('selected','selected');
+
+	$.getJSON(maze_json, function(json) {
+		maze_sel = maze_selp;
+		maze = json;
+		drawMaze();
+		drawMice();
+	});
+
+};
+
+function rads(degrees) {
+	return (Math.PI/180)*degrees;
+}
+
+function drawMaze() {
+	var x;
+	var y;
+	var px;
+	var py;
+	var code;
+
+	// clear canvas
+	canvas.width = canvas.width;
+
+	for (y=0;y<cHeight;y++) {
+		for (x=0;x<cWidth;x++) {
+			code = maze[y][x];
+			px = x * pCellWidth;
+			py = y * pCellHeight;
+
+			// north wall
+			ctx.beginPath();
+			ctx.moveTo(px,py);
+			ctx.lineTo(px+pCellWidth,py);
+			if (code.indexOf("N") !== -1) {
+				ctx.strokeStyle="white";
+			} else {
+				ctx.strokeStyle="blue";
+			}
+			ctx.stroke();
+
+			// east wall
+			ctx.beginPath();
+			ctx.moveTo(px+pCellWidth,py);
+			ctx.lineTo(px+pCellWidth,py+pCellHeight);
+			if (code.indexOf("E") !== -1) {
+				ctx.strokeStyle="white";
+			} else {
+				ctx.strokeStyle="blue";
+			}
+			ctx.stroke();
+
+			// south wall
+			ctx.beginPath();
+			ctx.moveTo(px+pCellWidth,py+pCellHeight);
+			ctx.lineTo(px,py+pCellHeight);
+			if (code.indexOf("S") !== -1) {
+				ctx.strokeStyle="white";
+			} else {
+				ctx.strokeStyle="blue";
+			}
+			ctx.stroke();
+
+			// west wall
+			ctx.beginPath();
+			ctx.moveTo(px,py+pCellHeight);
+			ctx.lineTo(px,py);
+			if (code.indexOf("W") !== -1) {
+				ctx.strokeStyle="white";
+			} else {
+				ctx.strokeStyle="blue";
+			}
+			ctx.stroke();
+		}
+	}
+}
+
+function drawMice() {
+	for (var i = 0; i < mouse_new.length; i++) {
+		mouse_new[i].draw();
+	}
+}
+
+function updateCoordinates() {
+	setInterval(function(){
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var strCoordinates = this.responseText;
+				var coordinates = strCoordinates.split(',');
+				for (var i = 0; i < mouse_new.length; i++) {
+					mouse_new[i].updateCoordinates(parseInt(coordinates[2*i]), 
+													parseInt(coordinates[2*i+1]));
+				}
+			}
+		};
+		xhttp.open("GET", "queryRobot.php", true);
+		xhttp.send();
+	}, 1000);
+};
 
 // start closure
 (function () {
@@ -106,7 +271,9 @@ function Mouse(pos) {
 /*
  ****************************************************
  * Global variables to this closure
- ****************************************************
+ 
+var pWidth;	// the width of maze in pixels
+var pHeight; // the height of the maze in pixels****************************************************
  */
 
 // Note: For the maze the top left cell is
@@ -116,8 +283,6 @@ var cWidth;	// the width of the maze in cells
 var cHeight;	// the height of the maze in cells
 var canvas; // the html5 canvas we draw on
 var ctx;	// the canvas context
-var pWidth;	// the width of maze in pixels
-var pHeight; // the height of the maze in pixels
 var pCellWidth; // width of a cell in pixels
 var pCellHeight;	// height of a cell in pixels
 var speed;		// the number of steps it takes to move one cell
