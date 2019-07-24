@@ -53,6 +53,8 @@ mouse_new[1] = new Mouse(origin_pos[1], "N");
 mouse_new[2] = new Mouse(origin_pos[2], "S");
 mouse_new[3] = new Mouse(origin_pos[3], "N");
 
+var runTimer; // The timer of updating the canvas
+
 function Mouse(pos, dir) {
 	var mRadius;					// mouse radius.
 	this.origin_pos = pos;
@@ -248,7 +250,7 @@ function drawMice() {
 }
 
 function updateCoordinates() {
-	setInterval(function(){
+	runTimer = setInterval(function(){
 		xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -262,8 +264,14 @@ function updateCoordinates() {
 		};
 		xhttp.open("GET", "queryRobot.php", true);
 		xhttp.send();
-	}, 1000);
+	}, 500);
 };
+
+function removeTimer() {
+	if (runTimer) {
+		clearInterval(runTimer);
+	}
+}
 
 // start closure
 (function () {

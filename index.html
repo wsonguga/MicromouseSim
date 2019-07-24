@@ -6,27 +6,12 @@
 	<link type="text/css" href="jquery-ui-1.8.12.custom.css" rel="stylesheet" />	
 	<link rel="stylesheet" href="main.css" type="text/css">
 
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-22596395-2']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
-
 </head>
 
 
 <body>
 
-<h2>Micromouse Simulator <a class="small_link" href="https://github.com/eniacluo/MicromouseSim">Source on GitHub</a></h2>
-
+<h2>Micromouse Simulator </h2>
 
 <div id="maze_div">
 <form>
@@ -113,10 +98,11 @@
 <canvas id="maze" width="512" height="512"> </canvas>
 
 <div id="maze_controls_div">
-<button id = "reset" type="button" disabled="disabled">Reset</button>
 <button id = "home" type="button" disabled="disabled">Home</button>
 <button id = "start_stop" type="button">Download</button>
-<button id = "update" type="button">Update</button>
+<button id = "reset" type="button" disabled="disabled">Stop</button>
+<span id = "response"></span>
+<input type="hidden" id="sessionId" value="">
 </div>
 
 </form>
@@ -172,48 +158,41 @@ jQuery(function() {
 			$("#start_stop").html("Download");
 			$("#start_stop").attr("disabled","");
 			$("#home").attr("disabled","disabled");
-			$("#update").attr("disabled","disabled");
 			$("#reset").attr("disabled","disabled");
 		}
 	);
 
 	$('#start_stop').click(
 		function(event) {
-			// var code = $("#driver_code").val();
-			// if ($('#start_stop').html() === 'Download') {
-			// 	jQuery.globalEval(code);
-			// 	mouse.loadDriver(driver);
-			// 	$("#download").html("Download and Reset Mouse");
-			// 	$("#home").attr("disabled","");
-			// 	$("#start_stop").attr("disabled","");
-			// 	$("#step").attr("disabled","");
-			// 	$("#reset").attr("disabled","");
-			// 	$('#start_stop').html('Start');
-			// 	return;
-			// }
-			// if ($('#start_stop').html() === 'Start') {
-			// 	mouse.start();
-			// 	$('#start_stop').html('Stop');
+			if ($('#start_stop').html() === 'Download') {
+				$('#start_stop').html('Wait...');
+				$.ajax({
+					url:"saveStrategy.php ",
+					type:"POST",
 
-			// } else {
-			// 	mouse.stop();
-			// 	$('#start_stop').html('Start');
-			// }
-			$.ajax({
-				url:"saveStrategy.php ",
-				type:"POST",
+					data:{
+						strategy: myCodeMirror.getValue(),
+						maze: $('#maze_sel option:selected').val(),
+					},
+					success:function(response) {
+						$("#response").html("response: "+response);
+						$("#start_stop").html('Run');
+						$("#start_stop").attr("disabled","");
+						if (response != "Retry") {
+							$('#sessionId').val(response);
+						}
+				    },
+				    error:function() {
+				    	alert("error");
+					}
 
-				data:{
-					strategy: myCodeMirror.getValue(),
-				},
-				success:function(response) {
-					$("#start_stop").html(response);
-			    },
-			    error:function() {
-			    	alert("error");
-				}
-
-  			});
+	  			});
+			}
+			if ($('#start_stop').html() === 'Run') {
+				$("#start_stop").attr("disabled","disabled");
+				$("#reset").attr("disabled","");
+				updateCoordinates();
+			}
 		}
 	);
 
@@ -247,18 +226,41 @@ jQuery(function() {
 		}
 	);
 
-	$('#update').click(updateCoordinates);
 	$('#home').click(mouse.home);
-	$('#reset').click(mouse.reset);
+	$('#reset').click(
+		function(event) {
+			$.ajax({
+				url:"stopSession.php ",
+				type:"POST",
+
+				data:{
+					session: $("#sessionId").val(),
+				},
+				success:function(response) {
+					$("#response").html("response: "+response);
+					$("#start_stop").html('Download');
+					$("#start_stop").attr("disabled","");
+					$("#reset").attr("disabled","disabled");
+				},
+				error:function() {
+					$("#start_stop").attr("disabled","");
+					$("#reset").attr("disabled","disabled");
+					alert("Session failed to terminate. Please contact TA.");
+				}
+
+			});
+			removeTimer();
+		}
+	);
 
 	// value on page load
 	$("#home").attr("disabled","disabled");
 	$("#reset").attr("disabled","disabled");
 
 	// select random maze
-	var last_opt = $('#maze_sel option').size();
-	var rand_maze = Math.floor(Math.random()*last_opt+1)
-	$("#maze_sel option").eq(rand_maze).attr('selected','selected');
+	//var last_opt = $('#maze_sel option').size();
+	//var rand_maze = Math.floor(Math.random()*last_opt+1)
+	$("#maze_sel option:selected").attr('selected','selected');
 	var maze_sel = $('#maze_sel option:selected').val();
 
 

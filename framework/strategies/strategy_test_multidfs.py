@@ -6,7 +6,7 @@ from strategy import Strategy
 from network import NetworkInterface
 from time import sleep
 
-class StrategyMultiDFS(Strategy):
+class StrategyTestMultiDFS(Strategy):
 	mouse = None
 	isVisited = []
 	path = []

@@ -1,4 +1,6 @@
 <?php
+	ini_set('display_errors', 1);
+	
 	$db_hostname = '127.0.0.1';
 	$db_database = 'test_db';
 	$db_username = 'root';

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from task import Strategy
+from strategy import Strategy
 from time import sleep
 
 class StrategyBlank(Strategy):
