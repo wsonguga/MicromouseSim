@@ -134,6 +134,14 @@
 	
 </textarea>
 
+<textarea id="run_codemirror" rows=30>
+	
+</textarea>
+
+<textarea id="run_code" style="display:none;" rows=30>
+	
+</textarea>
+
 </form>
 
 </div>
@@ -166,6 +174,7 @@ jQuery(function() {
 		function(event) {
 			if ($('#start_stop').html() === 'Download') {
 				$('#start_stop').html('Wait...');
+				$("#start_stop").attr("disabled","disabled");
 				$.ajax({
 					url:"saveStrategy.php ",
 					type:"POST",
@@ -175,7 +184,7 @@ jQuery(function() {
 						maze: $('#maze_sel option:selected').val(),
 					},
 					success:function(response) {
-						$("#response").html("response: "+response);
+						$("#response").html("Session ID: "+response);
 						$("#start_stop").html('Run');
 						$("#start_stop").attr("disabled","");
 						if (response != "Retry") {
@@ -183,15 +192,32 @@ jQuery(function() {
 						}
 				    },
 				    error:function() {
-				    	alert("error");
+				    	alert("Failed to create a CORE session.");
+				    	$('#start_stop').html('Download');
 					}
 
 	  			});
 			}
 			if ($('#start_stop').html() === 'Run') {
 				$("#start_stop").attr("disabled","disabled");
-				$("#reset").attr("disabled","");
-				updateCoordinates();
+				$.ajax({
+					url:"runStrategy.php ",
+					type:"POST",
+
+					data:{
+						session: $("#sessionId").val(),
+					},
+					success:function(response) {
+						$("#response").html("Session "+$('#sessionId').val()+" is Running.");
+						$("#reset").attr("disabled","");
+						updateCoordinates();
+					},
+					error:function() {
+						$("#start_stop").attr("disabled","");
+						alert("Faild to start your program. Download again.");
+					}
+
+				});
 			}
 		}
 	);
@@ -237,19 +263,21 @@ jQuery(function() {
 					session: $("#sessionId").val(),
 				},
 				success:function(response) {
-					$("#response").html("response: "+response);
-					$("#start_stop").html('Download');
-					$("#start_stop").attr("disabled","");
-					$("#reset").attr("disabled","disabled");
+					if (response == "Stopped") {
+						$("#response").html("Session "+$('#sessionId').val()+" Stopped.");
+						$("#start_stop").html('Download');
+						$("#start_stop").attr("disabled","");
+						$("#reset").attr("disabled","disabled");
+						removeTimer();
+					} else {
+						$("#response").html(response);
+					}
 				},
 				error:function() {
-					$("#start_stop").attr("disabled","");
-					$("#reset").attr("disabled","disabled");
 					alert("Session failed to terminate. Please contact TA.");
 				}
 
 			});
-			removeTimer();
 		}
 	);
 
@@ -280,10 +308,26 @@ jQuery(function() {
         indentUnit: 4
 	});
 
-	var template_file = "templates/strategy_multidfs.py";
-	$('#driver_code').load(template_file, function(){
+	var template_file_strategy = "templates/strategy_multidfs.py";
+	$('#driver_code').load(template_file_strategy, function(){
 		myCodeMirror.setValue($('#driver_code').val());
-		myCodeMirror.setSize("100%", "auto");
+		myCodeMirror.setSize("100%", "60%");
+	});
+
+	var runCodeMirror = CodeMirror.fromTextArea(document.getElementById('run_codemirror'), {
+	  	mode: {	name: "python",
+               	version: 3,
+               	singleLineStringErrors: false,
+			  	lineNumbers: true,
+			  	lineWrapping: true},
+        lineNumbers: true,
+        indentUnit: 4
+	});
+
+	var template_file_demo = "templates/demo_core.py";
+	$('#run_code').load(template_file_demo, function(){
+		runCodeMirror.setValue($('#run_code').val());
+		runCodeMirror.setSize("100%", "40%");
 	});
 
 

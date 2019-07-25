@@ -3,7 +3,7 @@
         $mazeName = $_POST['maze'];
         copy("mazes_text/".$mazeName.".maze", "/tmp/micromouse/maze.txt");
     } else {
-        die("Maze file copy failed");
+        die("Unable to copy maze file.");
     }
     
     if(isset($_POST['strategy']) && !empty($_POST['strategy'])){
@@ -24,7 +24,7 @@
             copy("framework/strategy.py", "/tmp/micromouse/strategy.py");
             copy("framework/controller.py", "/tmp/micromouse/controller.py");
             copy("framework/maze.imn", "/tmp/micromouse/maze.imn");
-            $command = "/tmp/micromouse/php_root";
+            $command = "/tmp/micromouse/php_root save";
             exec($command, $output, $return_var);
             if ($return_var == 0) {
                 $myfile = fopen("/tmp/micromouse/sessionId.txt", "r") or die("Unable to open file!");
@@ -34,11 +34,14 @@
                 } else {
                     echo "No SessionId";
                 }
-            } 
-            //shell_exec("core-gui --batch /tmp/micromouse/maze.imn ".'2>&1 > out.log');
+            } else {
+                echo "Error ".$return_var;
+            }
+        } else {
+            die("Unable to create /tmp/micromouse/.");
         }
     } else {
-        die("Retry");
+        die("Unable to read your strategy.");
     }
     
 ?>

@@ -1,6 +1,6 @@
 <?php
 	ini_set('display_errors', 1);
-	
+
 	$db_hostname = '127.0.0.1';
 	$db_database = 'test_db';
 	$db_username = 'root';
@@ -22,7 +22,7 @@
 		if ($temp->num_rows > 0) {
 		    // output data of each row
 		    while($row = $temp->fetch_assoc()) {
-		        $result = $result . $row["robot_x"] . "," . $row["robot_y"] . ",";
+		        $result = $result . $row["robot_x"] . "," . $row["robot_y"] . "," . $row['direction'] . ",";
 		    }
 		}
 	}

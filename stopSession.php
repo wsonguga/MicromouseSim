@@ -1,12 +1,12 @@
 <?php
 	if(isset($_POST['session']) && !empty($_POST['session'])){
         $sessionId = $_POST['session'];
-		$command = "core-gui --closebatch ".$sessionId.">/dev/null 2>&1 &";
-    	exec($command, $output, $return_var);
+        $command = "/tmp/micromouse/php_root stop ".$sessionId;
+        exec($command, $output, $return_var);
     	if ($return_var == 0) {
-    		echo "Stop";
+    		echo "Stopped";
     	} else {
-    		echo $return_var;
+    		echo "Error ".$return_var;
     	}
 	}
 ?>

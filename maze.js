@@ -116,12 +116,14 @@ function Mouse(pos, dir) {
 		ctx.stroke();
 	}
 
-	this.updateCoordinates = function(x, y) {
+	this.updateCoordinates = function(x, y, direction) {
 		this.erase();
 		this.cMouseX = x;
 		this.cMouseY = y;
 		this.pMouseX = this.cell2px();	// mouse x pos in pixels
 		this.pMouseY = this.cell2py();	// mouse y pos in pixels
+		this.direction = direction;
+		this.aMouseDir = this.head2angle();
 		this.draw();
 	}
 
@@ -257,8 +259,26 @@ function updateCoordinates() {
 				var strCoordinates = this.responseText;
 				var coordinates = strCoordinates.split(',');
 				for (var i = 0; i < mouse_new.length; i++) {
-					mouse_new[i].updateCoordinates(parseInt(coordinates[2*i]), 
-													parseInt(coordinates[2*i+1]));
+					var x = parseInt(coordinates[3*i]);
+					var y = parseInt(coordinates[3*i+1]);
+					var direction;
+					switch(coordinates[3*i+2]) {
+						case "up":
+							direction = "N";
+							break;
+						case "down":
+							direction = "S";
+							break;
+						case "left":
+							direction = "W";
+							break;
+						case "right":
+							direction = "E";
+							break;
+						default:
+							direction = "N";
+					}
+					mouse_new[i].updateCoordinates(x, y, direction);
 				}
 			}
 		};

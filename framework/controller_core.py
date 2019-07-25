@@ -93,6 +93,6 @@ class COREServerController(COREController):
             self.xpos += 1
         if self.mydb is not None:
             mycursor = self.mydb.cursor()
-            sql = "UPDATE test_table SET robot_x = %d, robot_y = %d WHERE robot_id = %d;" % (self.xpos, self.ypos, int(self.index))
+            sql = "UPDATE test_table SET robot_x = %d, robot_y = %d, direction = '%s' WHERE robot_id = %d;" % (self.xpos, self.ypos, self.direction, int(self.index))
             mycursor.execute(sql)
             self.mydb.commit()
