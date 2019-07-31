@@ -1,5 +1,12 @@
+body {
+	margin: 0px;
+}
+
 h2 {
 	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: #F2F4F5;
 }
 
 .small_link {
@@ -20,14 +27,26 @@ h2 {
 
 canvas#maze {
 	border : inset;
+	width: 512px;
+	height: 512px;
+}
+
+#content_div {
+	float: auto;
 	width: 100%;
+	height: 100%;
 }
 
 #maze_div {
 	// border:4px solid#dfd;
-	margin-left: 20px;
+	padding-left: 20px;
 	float:left;
 	width: 45%;
+	height: 100%;
+}
+
+#maze_canvas_div {
+	text-align: center;
 }
 
 #driver_div {
@@ -35,6 +54,7 @@ canvas#maze {
 	margin-right: 20px;
 	float:right;
 	width: 45%;
+	height: 100%;
 }
 
 #driver_code {
@@ -42,18 +62,25 @@ canvas#maze {
 	height: 100%;
 }
 
+#code_strategy_div {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 60%;
+}
 
-
-#code_controls_div {
-	float:none;
-	text-align: center;
-	padding: 20px;
+#code_demo_div {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 40%;
 }
 
 #maze_controls_div {
-	float:left;
-	text-align: left;
+	//float:left;
+	text-align: center;
+	margin: 0 auto;
 	padding: 20px;
+	background-color: #F2F4F5;
+	width: 100%
 }
 
 #slider_left {

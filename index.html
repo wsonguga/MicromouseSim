@@ -5,6 +5,7 @@
 
 	<link type="text/css" href="jquery-ui-1.8.12.custom.css" rel="stylesheet" />	
 	<link rel="stylesheet" href="main.css" type="text/css">
+	<meta name="google-signin-client_id" content="151801924080-lp4ab32de5jh8u79po2f8ajqhmkjpkgf.apps.googleusercontent.com">
 
 </head>
 
@@ -13,6 +14,7 @@
 
 <h2>Micromouse Simulator </h2>
 
+<div id="content_div">
 <div id="maze_div">
 <form>
 <span class="heading">Maze</span>
@@ -95,22 +97,17 @@
 </select>
 </div>
 
-<canvas id="maze" width="512" height="512"> </canvas>
-
-<div id="maze_controls_div">
-<button id = "home" type="button" disabled="disabled">Home</button>
-<button id = "start_stop" type="button">Download</button>
-<button id = "reset" type="button" disabled="disabled">Stop</button>
-<span id = "response"></span>
-<input type="hidden" id="sessionId" value="">
+<div id="maze_canvas_div">
+	<canvas id="maze" width="512" height="512"> </canvas>
 </div>
+
 
 </form>
 </div>
 
 <div id="driver_div">
 <form>
-<span class="heading">Algorithm</span>
+<span class="heading">Strategy</span>
 
 <div class="select">
 <label for="driver_sel">(<a href="https://github.com/eniacluo/Micromouse/tree/master/framework">Documentations</a>)</label>
@@ -120,30 +117,35 @@
 </select>
 </div>
 
-<div id="code_controls_div">
-<!--
-<button id="download" type="button">*Download and Reset Mouse</button>
--->
+<div id="coding_div">
+	<div id="code_strategy_div">
+		<textarea id="driver_codemirror" rows=30></textarea>
+		<textarea id="driver_code" style="display:none;" rows=30></textarea>
+	</div>
+	<div id="code_demo_div">
+		<span class="heading">Starting function</span>
+		<textarea id="run_codemirror" rows=30></textarea>
+		<textarea id="run_code" style="display:none;" rows=30></textarea>
+	</div>
 </div>
 
-<textarea id="driver_codemirror" rows=30>
-	
-</textarea>
-
-<textarea id="driver_code" style="display:none;" rows=30>
-	
-</textarea>
-
-<textarea id="run_codemirror" rows=30>
-	
-</textarea>
-
-<textarea id="run_code" style="display:none;" rows=30>
-	
-</textarea>
 
 </form>
 
+</div>
+
+</div>
+
+<div id="maze_controls_div">
+<form>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<button id = "home" type="button" disabled="disabled">Home</button>
+	<button id = "start_stop" type="button">Download</button>
+	<button id = "reset" type="button" disabled="disabled">Stop</button>
+	<span id = "response"></span>
+	<input type="hidden" id="sessionId" value="">
+
+</form>
 </div>
 
 
@@ -156,6 +158,7 @@
 <script src="lib/codemirror.js"></script>
 <link rel="stylesheet" href="lib/codemirror.css">
 <script src="mode/python/python.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <script type="text/javascript">
 jQuery(function() {
@@ -239,7 +242,7 @@ jQuery(function() {
 			// so we change to this version
 			$('#driver_code').load(template_file, function(){
 				myCodeMirror.setValue($('#driver_code').val());
-				myCodeMirror.setSize("100%", "100%")
+				myCodeMirror.setSize("100%", "90%");
 			});
 
 			// mouse.loadDriver(driver);
@@ -311,7 +314,7 @@ jQuery(function() {
 	var template_file_strategy = "templates/strategy_multidfs.py";
 	$('#driver_code').load(template_file_strategy, function(){
 		myCodeMirror.setValue($('#driver_code').val());
-		myCodeMirror.setSize("100%", "60%");
+		myCodeMirror.setSize("100%", "90%");
 	});
 
 	var runCodeMirror = CodeMirror.fromTextArea(document.getElementById('run_codemirror'), {
@@ -327,7 +330,7 @@ jQuery(function() {
 	var template_file_demo = "templates/demo_core.py";
 	$('#run_code').load(template_file_demo, function(){
 		runCodeMirror.setValue($('#run_code').val());
-		runCodeMirror.setSize("100%", "40%");
+		runCodeMirror.setSize("100%", "90%");
 	});
 
 
