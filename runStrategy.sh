@@ -1,8 +1,9 @@
 #!/bin/sh
 
-sessionId=$1
+userId=$1
+sessionId=$2
 
-coresendmsg exec --session=$sessionId node=1 num=5 cmd="/tmp/micromouse/demo_core.py"
-coresendmsg exec --session=$sessionId node=2 num=5 cmd="/tmp/micromouse/demo_core.py"
-coresendmsg exec --session=$sessionId node=3 num=5 cmd="/tmp/micromouse/demo_core.py"
-coresendmsg exec --session=$sessionId node=4 num=5 cmd="/tmp/micromouse/demo_core.py"
+coresendmsg exec --session=$sessionId node=$(($userId*5-4)) num=250 cmd="/tmp/micromouse/$userId/demo_core.py"
+coresendmsg exec --session=$sessionId node=$(($userId*5-3)) num=250 cmd="/tmp/micromouse/$userId/demo_core.py"
+coresendmsg exec --session=$sessionId node=$(($userId*5-2)) num=250 cmd="/tmp/micromouse/$userId/demo_core.py"
+coresendmsg exec --session=$sessionId node=$(($userId*5-1)) num=250 cmd="/tmp/micromouse/$userId/demo_core.py"

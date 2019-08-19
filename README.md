@@ -1,9 +1,9 @@
-A HTML5 Micromouse simulator
+A Web-based Cooperative Micromouse Algorithm Simulator
 ============================
 
 This web app can be used to test Micromouse algorithms in your
-web browser.  It exposes a [JavaScript Mouse
-API](https://github.com/bblodget/MicromouseSim/wiki/Mouse-API)
+web browser.  It exposes a [Python Mouse
+API](https://github.com/eniacluo/Micromouse/)
 for controlling a simulated mouse running in a simulated maze.
 You can type your mouse driver code directly in a textbox on the
 web page.
@@ -14,37 +14,12 @@ source of these mazes are
 
 [http://www.tcp4me.com/mmr/mazes/](http://www.tcp4me.com/mmr/mazes/)
 
-Known Issues
-------------
-
-* Currently there is no way to save the mouse
-driver code you type from the application.  So if you want to
-save it you should cut and paste it to a file on your local
-machine.  
-* There is no error checking of the JavaScript mouse driver
-code.  If you have errors in your code you many not find out
-until the code is running.  If the page freezes up you may have
-to reload which may cause you to loose your changes.
-
-This applicaiton is all client side JavaScript.  The best bet
-might be to download and run it locally.  This way you can edit
-and save your mouse driver code locally.  It is also helpful to
-use Firefox's [Firebug](http://getfirebug.com/) extension for
-debugging.
-
-Online Demo
------------
-
-There is an online demo running at 
-
-[http://bblodget.github.com/MicromouseSim](http://bblodget.github.com/MicromouseSim)
-
 Download and run locally
 ------------------------
 
 You can download the latest source via
 
-	git clone https://bblodget@github.com/bblodget/MicromouseSim.git
+	git clone https://github.com/eniacluo/MicromouseSim.git
 
 Open the file MicromouseSim/index.html in Firefox or Safari.
 Chrome's security model won't allow this application run
@@ -69,6 +44,6 @@ License along with this program.  If not, see
 
 enjoy,
 
-Brandon Blodget <blodget.sw@gmail.com>
+Zhiwei Luo <eniacsimon@gmail.com>
 
 

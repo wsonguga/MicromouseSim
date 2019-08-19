@@ -1,5 +1,9 @@
 #!/bin/sh
 
-sessionId=$1
+userId=$1
+sessionId=$2
 
-core-gui --closebatch $sessionId
+coresendmsg exec --session=$sessionId node=$(($userId*5-4)) num=250 cmd="/tmp/micromouse/killp.sh"
+coresendmsg exec --session=$sessionId node=$(($userId*5-3)) num=250 cmd="/tmp/micromouse/killp.sh"
+coresendmsg exec --session=$sessionId node=$(($userId*5-2)) num=250 cmd="/tmp/micromouse/killp.sh"
+coresendmsg exec --session=$sessionId node=$(($userId*5-1)) num=250 cmd="/tmp/micromouse/killp.sh"

@@ -70,16 +70,17 @@ class COREController(MotorController):
 
 
 class COREServerController(COREController):
-    def __init__(self, index, initPoint, controlNet):
+    def __init__(self, index, initPoint, sessionId, controlNet):
         self.index = index
         self.xpos = initPoint[0]
         self.ypos = initPoint[1]
+        self.sessionId = sessionId
         self.controlNet = controlNet
         self.mydb = mysql.connector.connect(
           host=controlNet,
           user="root",
           passwd="luoeniac43",
-          database="test_db"
+          database="micromouse"
         )
 
     def goStraight(self):
@@ -93,6 +94,6 @@ class COREServerController(COREController):
             self.xpos += 1
         if self.mydb is not None:
             mycursor = self.mydb.cursor()
-            sql = "UPDATE test_table SET robot_x = %d, robot_y = %d, direction = '%s' WHERE robot_id = %d;" % (self.xpos, self.ypos, self.direction, int(self.index))
+            sql = "UPDATE robots SET robot_x = %d, robot_y = %d, direction = '%s' WHERE session_id = %d AND robot_id = %d;" % (self.xpos, self.ypos, self.direction, int(self.sessionId), int(self.index))
             mycursor.execute(sql)
             self.mydb.commit()

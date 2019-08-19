@@ -3,42 +3,55 @@
 #Author: Zhiwei Luo
 
 from strategy import Strategy
-from network import NetworkInterface
 from time import sleep
+from socket import *
+import _pickle as pickle
+import threading
 
 class StrategyMultiDFS(Strategy):
 	mouse = None
 	isVisited = []
 	path = []
 	isBack = False
-	network = None
+
+	udpPort = 6666
+	broadcastAddr = '10.0.0.255'
+	bufferList = []
 
 	def __init__(self, mouse):
 		self.mouse = mouse
 		self.isVisited = [[0 for i in range(self.mouse.mazeMap.width)] for j in range(self.mouse.mazeMap.height)]
 		self.isVisited[self.mouse.x][self.mouse.y] = 1
-		self.network = NetworkInterface()
-		self.network.initSocket()
-		self.network.startReceiveThread()
+		self.socketUdp = socket(AF_INET, SOCK_DGRAM)
+		self.socketUdp.bind(('', self.udpPort))
+		self.socketUdp.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
+		self.threadReceive = threading.Thread(name='receive', target=self.receiveDataThread)
+		self.threadReceive.setDaemon(True)
+		self.threadReceive.start()
 
 	def checkFinished(self):
 		return self.isBack
 
 	def go(self):
 		self.mouse.senseWalls()
-		print(self.mouse.getCurrentCell().getWhichIsWall())
-		sendData = {'x': self.mouse.x, 'y':self.mouse.y, 'up': not self.mouse.canGoUp(), 'down': not self.mouse.canGoDown(), 'left': not self.mouse.canGoLeft(), 'right': not self.mouse.canGoRight()}
-		self.network.sendStringData(sendData)
-		recvData = self.network.retrieveData()
-		while recvData:
-			otherMap = recvData
-			cell = self.mouse.mazeMap.getCell(otherMap['x'], otherMap['y'])
-			self.isVisited[otherMap['x']][otherMap['y']] = 1
-			if otherMap['up']: self.mouse.mazeMap.setCellUpAsWall(cell)
-			if otherMap['down']: self.mouse.mazeMap.setCellDownAsWall(cell)
-			if otherMap['left']: self.mouse.mazeMap.setCellLeftAsWall(cell)
-			if otherMap['right']: self.mouse.mazeMap.setCellRightAsWall(cell)
-			recvData = self.network.retrieveData()
+		sendData = {}
+		sendData['x'] = self.mouse.x
+		sendData['y'] = self.mouse.y
+		sendData['up'] = not self.mouse.canGoUp()
+		sendData['down'] = not self.mouse.canGoDown()
+		sendData['left'] = not self.mouse.canGoLeft()
+		sendData['right'] = not self.mouse.canGoRight()
+		self.socketUdp.sendto(pickle.dumps(sendData), (self.broadcastAddr, self.udpPort))
+		# Update local map from the information sent by other robots
+		while len(self.bufferList) > 0:
+			recvData = pickle.loads(self.bufferList[0])
+			cell = self.mouse.mazeMap.getCell(recvData['x'], recvData['y'])
+			self.isVisited[recvData['x']][recvData['y']] = 1
+			if recvData['up']: self.mouse.mazeMap.setCellUpAsWall(cell)
+			if recvData['down']: self.mouse.mazeMap.setCellDownAsWall(cell)
+			if recvData['left']: self.mouse.mazeMap.setCellLeftAsWall(cell)
+			if recvData['right']: self.mouse.mazeMap.setCellRightAsWall(cell)
+			self.bufferList = self.bufferList[1:]
 
 		if self.mouse.canGoLeft() and not self.isVisited[self.mouse.x-1][self.mouse.y]:
 			self.path.append([self.mouse.x, self.mouse.y])
@@ -71,3 +84,8 @@ class StrategyMultiDFS(Strategy):
 				self.isBack = True
 
 		sleep(0.5)
+
+	def receiveDataThread(self):
+		while True:
+			dataRecv, addr = self.socketUdp.recvfrom(1000)
+			self.bufferList.append(dataRecv)

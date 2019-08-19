@@ -1,342 +1,362 @@
-<html>
-
+<html lang="en">
 <head>
-	<title>Micromouse Simulator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link type="text/css" href="jquery-ui-1.8.12.custom.css" rel="stylesheet" />	
-	<link rel="stylesheet" href="main.css" type="text/css">
-	<meta name="google-signin-client_id" content="151801924080-lp4ab32de5jh8u79po2f8ajqhmkjpkgf.apps.googleusercontent.com">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <meta name="google-signin-client_id" content="151801924080-lp4ab32de5jh8u79po2f8ajqhmkjpkgf.apps.googleusercontent.com">
 
+    <title>Micromouse Algorithm Simulator</title>
 </head>
-
-
 <body>
+    <h1 class="text-center">Micromouse Algorithm Simulator</h1>
 
-<h2>Micromouse Simulator </h2>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<div id="content_div">
-<div id="maze_div">
-<form>
-<span class="heading">Maze</span>
-
-<div class="select">
-<label for="maze_sel">(<a href="http://www.tcp4me.com/mmr/mazes/">source url</a>)</label>
-<select name="maze_sel" id="maze_sel">
-  <option value="00japan">00japan</option>
-  <option value="11rbgames">11rbgames</option>
-  <option value="1stworld">1stworld</option>
-  <option value="80japx">80japx</option>
-  <option value="81japx">81japx</option>
-  <option value="82japx">82japx</option>
-  <option value="82us">82us</option>
-  <option value="82japx">82japx</option>
-  <option value="83japx">83japx</option>
-  <option value="83us">83us</option>
-  <option value="84japx">84japx</option>
-  <option value="85japx">85japx</option>
-  <option value="85usa">85usa</option>
-  <option value="86">86</option>
-  <option value="86chi">86chi</option>
-  <option value="86jap">86jap</option>
-  <option value="86japx">86japx</option>
-  <option value="87iee">87iee</option>
-  <option value="87jap">87jap</option>
-  <option value="87japx">87japx</option>
-  <option value="87sin">87sin</option>
-  <option value="87us1">87us1</option>
-  <option value="88iee">88iee</option>
-  <option value="88jap">88jap</option>
-  <option value="88japx">88japx</option>
-  <option value="88lon">88lon</option>
-  <option value="88mtl">88mtl</option>
-  <option value="88sin">88sin</option>
-  <option value="88us">88us</option>
-  <option value="89ape">89ape</option>
-  <option value="89iee">89iee</option>
-  <option value="89japa1">89japa1</option>
-  <option value="89japa2">89japa2</option>
-  <option value="89japx">89japx</option>
-  <option value="89lon">89lon</option>
-  <option value="89lonq">89lonq</option>
-  <option value="89sina1">89sina1</option>
-  <option value="90japx">90japx</option>
-  <option value="90lon">90lon</option>
-  <option value="90lonq">90lonq</option>
-  <option value="90tor">90tor</option>
-  <option value="91hon">91hon</option>
-  <option value="91japa1">91japa1</option>
-  <option value="91japq">91japq</option>
-  <option value="91japx">91japx</option>
-  <option value="91lon">91lon</option>
-  <option value="91tor">91tor</option>
-  <option value="92bos">92bos</option>
-  <option value="92japx">92japx</option>
-  <option value="92lon">92lon</option>
-  <option value="92lonq">92lonq</option>
-  <option value="93apec">93apec</option>
-  <option value="93japx">93japx</option>
-  <option value="94beam1">94beam1</option>
-  <option value="94beam2">94beam2</option>
-  <option value="94japan">94japan</option>
-  <option value="94japx">94japx</option>
-  <option value="95japx">95japx</option>
-  <option value="96japx">96japx</option>
-  <option value="97japx">97japx</option>
-  <option value="j1">j1</option>
-  <option value="j2">j2</option>
-  <option value="j3">j3</option>
-  <option value="j4">j4</option>
-  <option value="j5">j5</option>
-  <option value="j6">j6</option>
-  <option value="loop">loop</option>
-  <option value="museum">museum</option>
-  <option value="test1">test1</option>
-  <option value="zigzag">zigzag</option>
-  <option value="blank">blank</option>
-  <option value="west_wall">west_wall</option>
-</select>
-</div>
-
-<div id="maze_canvas_div">
-	<canvas id="maze" width="512" height="512"> </canvas>
-</div>
-
-
-</form>
-</div>
-
-<div id="driver_div">
-<form>
-<span class="heading">Strategy</span>
-
-<div class="select">
-<label for="driver_sel">(<a href="https://github.com/eniacluo/Micromouse/tree/master/framework">Documentations</a>)</label>
-<select name="driver_sel" id="driver_sel">
-  <option value="multidfs" selected="selected">MultiDFS</option>
-  <option value="blank">Blank</option>
-</select>
-</div>
-
-<div id="coding_div">
-	<div id="code_strategy_div">
-		<textarea id="driver_codemirror" rows=30></textarea>
-		<textarea id="driver_code" style="display:none;" rows=30></textarea>
-	</div>
-	<div id="code_demo_div">
-		<span class="heading">Starting function</span>
-		<textarea id="run_codemirror" rows=30></textarea>
-		<textarea id="run_code" style="display:none;" rows=30></textarea>
-	</div>
-</div>
-
-
-</form>
-
-</div>
-
-</div>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div style="display: inline-block;">
+                    <h3><a href="http://www.tcp4me.com/mmr/mazes/">Map</a></h3>
+                </div>
+                <div id="select_maze_div" style="display: inline-block; margin-left: 305px;">
+                    <select name="maze_sel" id="maze_sel">
+                      <option value="00japan">00japan</option>
+                      <option value="11rbgames">11rbgames</option>
+                      <option value="1stworld">1stworld</option>
+                      <option value="80japx">80japx</option>
+                      <option value="81japx">81japx</option>
+                      <option value="82japx">82japx</option>
+                      <option value="82us">82us</option>
+                      <option value="82japx">82japx</option>
+                      <option value="83japx">83japx</option>
+                      <option value="83us">83us</option>
+                      <option value="84japx">84japx</option>
+                      <option value="85japx">85japx</option>
+                      <option value="85usa">85usa</option>
+                      <option value="86">86</option>
+                      <option value="86chi">86chi</option>
+                      <option value="86jap">86jap</option>
+                      <option value="86japx">86japx</option>
+                      <option value="87iee">87iee</option>
+                      <option value="87jap">87jap</option>
+                      <option value="87japx">87japx</option>
+                      <option value="87sin">87sin</option>
+                      <option value="87us1">87us1</option>
+                      <option value="88iee">88iee</option>
+                      <option value="88jap">88jap</option>
+                      <option value="88japx">88japx</option>
+                      <option value="88lon">88lon</option>
+                      <option value="88mtl">88mtl</option>
+                      <option value="88sin">88sin</option>
+                      <option value="88us">88us</option>
+                      <option value="89ape">89ape</option>
+                      <option value="89iee">89iee</option>
+                      <option value="89japa1">89japa1</option>
+                      <option value="89japa2">89japa2</option>
+                      <option value="89japx">89japx</option>
+                      <option value="89lon">89lon</option>
+                      <option value="89lonq">89lonq</option>
+                      <option value="89sina1">89sina1</option>
+                      <option value="90japx">90japx</option>
+                      <option value="90lon">90lon</option>
+                      <option value="90lonq">90lonq</option>
+                      <option value="90tor">90tor</option>
+                      <option value="91hon">91hon</option>
+                      <option value="91japa1">91japa1</option>
+                      <option value="91japq">91japq</option>
+                      <option value="91japx">91japx</option>
+                      <option value="91lon">91lon</option>
+                      <option value="91tor">91tor</option>
+                      <option value="92bos">92bos</option>
+                      <option value="92japx">92japx</option>
+                      <option value="92lon">92lon</option>
+                      <option value="92lonq">92lonq</option>
+                      <option value="93apec">93apec</option>
+                      <option value="93japx">93japx</option>
+                      <option value="94beam1">94beam1</option>
+                      <option value="94beam2">94beam2</option>
+                      <option value="94japan">94japan</option>
+                      <option value="94japx">94japx</option>
+                      <option value="95japx">95japx</option>
+                      <option value="96japx">96japx</option>
+                      <option value="97japx">97japx</option>
+                      <option value="j1">j1</option>
+                      <option value="j2">j2</option>
+                      <option value="j3">j3</option>
+                      <option value="j4">j4</option>
+                      <option value="j5">j5</option>
+                      <option value="j6">j6</option>
+                      <option value="loop">loop</option>
+                      <option value="museum">museum</option>
+                      <option value="test1">test1</option>
+                      <option value="zigzag">zigzag</option>
+                      <option value="blank">blank</option>
+                      <option value="west_wall">west_wall</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h3><a href="https://github.com/eniacluo/Micromouse/tree/master/framework">Strategy Code</a></h3>
+            </div>
+            <div id="select_code_div" class="col-md-2">
+                <div class="text-right">
+                    <select name="driver_sel" id="driver_sel" >
+                        <option value="multidfs" selected="selected">MultiDFS</option>
+                        <option value="blank">Blank</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div id="maze_div" class="col-md-4">
+          <canvas id="maze" width="480" height="480"> </canvas>
+        </div>
+        <div id="code_div" class="col-md-8" >
+            <form>
+                <textarea id="driver_codemirror" rows=10></textarea>
+                <textarea id="driver_code" style="display:none;" rows=10></textarea>
+            </form>
+        </div>
+    </div>
 <div id="maze_controls_div">
-<form>
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	<button id = "home" type="button" disabled="disabled">Home</button>
-	<button id = "start_stop" type="button">Download</button>
-	<button id = "reset" type="button" disabled="disabled">Stop</button>
-	<span id = "response"></span>
-	<input type="hidden" id="sessionId" value="">
-
-</form>
+    <form>
+        <div id = "gsignin" class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!--<button id = "home" type="button" disabled="disabled">Home</button>-->
+        <button id = "signout" onclick="signOut()" class="btn btn-primary" disabled="disabled">Sign out</button>
+        <button id = "start_stop" class="btn btn-primary" type="button">Download</button>
+        <button id = "reset" class="btn btn-primary" type="button" disabled="disabled">Stop</button>
+        <input type="hidden" id="email" value="">
+        <input type="hidden" id="sessionId" value="">
+    </form>
 </div>
+<div id="msg_div">
+    <p id = "signInName"></p>
+    <p id = "response"></p>
+    <button id = "showerror" class="btn btn-primary" type="button">Show Error</button>
+</div>
+<p id = "errorPython"></p>
 
-
-
+</div>
 </body>
-
-<script type="text/javascript" src="jquery-1.5.2.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.8.12.custom.min.js"></script>
 <script type="text/javascript" src="maze.js"></script>
 <script src="lib/codemirror.js"></script>
 <link rel="stylesheet" href="lib/codemirror.css">
 <script src="mode/python/python.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-
 <script type="text/javascript">
-jQuery(function() {
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        $("#signInName").html('Signed in as ' + profile.getName() + ' ');
+        $("#signout").attr("disabled", false);
+        $("#email").val(profile.getEmail());
+        $("#signout").show();
+        $("#start_stop").show();
+        $("#reset").show();
+        $("#gsignin").hide();
+    }
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            auth2.disconnect();
+            $("#signout").attr("disabled", true);
+            $("#signout").hide();
+            $("#start_stop").hide();
+            $("#reset").hide();
+            $("#gsignin").show();
+        });
+    }
+</script>
+<script type="text/javascript">
+    jQuery(function() {
 
-	$('#driver_code').change(
-		function(event) {
-			//$("#download").html("*Download and Reset Mouse");
-			$("#start_stop").html("Download");
-			$("#start_stop").attr("disabled","");
-			$("#home").attr("disabled","disabled");
-			$("#reset").attr("disabled","disabled");
-		}
-	);
+        $('#driver_code').change(
+            function(event) {
+            //$("#download").html("*Download and Reset Mouse");
+            $("#start_stop").html("Download");
+            $("#start_stop").attr("disabled",false);
+            $("#reset").attr("disabled",true);
+        }
+        );
 
-	$('#start_stop').click(
-		function(event) {
-			if ($('#start_stop').html() === 'Download') {
-				$('#start_stop').html('Wait...');
-				$("#start_stop").attr("disabled","disabled");
-				$.ajax({
-					url:"saveStrategy.php ",
-					type:"POST",
+        $('#start_stop').click(
+            function(event) {
+                if ($('#start_stop').html() === 'Download') {
+                    resetMice();
+                    $('#start_stop').html('Wait...');
+                    $("#start_stop").attr("disabled",true);
+                    $.ajax({
+                        url:"saveStrategy.php ",
+                        type:"POST",
 
-					data:{
-						strategy: myCodeMirror.getValue(),
-						maze: $('#maze_sel option:selected').val(),
-					},
-					success:function(response) {
-						$("#response").html("Session ID: "+response);
-						$("#start_stop").html('Run');
-						$("#start_stop").attr("disabled","");
-						if (response != "Retry") {
-							$('#sessionId').val(response);
-						}
-				    },
-				    error:function() {
-				    	alert("Failed to create a CORE session.");
-				    	$('#start_stop').html('Download');
-					}
+                        data:{
+                            strategy: myCodeMirror.getValue(),
+                            maze: $('#maze_sel option:selected').val(),
+                            email: $("#email").val(),
+                        },
+                        success:function(response) {
+                            if (response.length < 3) {
+                                $("#response").html("Your session Id: "+response);
+                                $('#sessionId').val(response);
+                                $("#start_stop").html('Run');
+                            } else {
+                                $("#start_stop").html('Download');
+                                $("#response").html("Error: "+response);
+                            }
+                            $("#start_stop").attr("disabled",false);
+                        },
+                        error:function() {
+                            $("#response").html("Unknown error. Try again.");
+                            $('#start_stop').html('Download');
+                            $("#start_stop").attr("disabled",false);
+                        }
 
-	  			});
-			}
-			if ($('#start_stop').html() === 'Run') {
-				$("#start_stop").attr("disabled","disabled");
-				$.ajax({
-					url:"runStrategy.php ",
-					type:"POST",
+                    });
+                }
+                if ($('#start_stop').html() === 'Run') {
+                    $("#start_stop").attr("disabled",true);
+                    $.ajax({
+                        url:"runStrategy.php ",
+                        type:"POST",
 
-					data:{
-						session: $("#sessionId").val(),
-					},
-					success:function(response) {
-						$("#response").html("Session "+$('#sessionId').val()+" is Running.");
-						$("#reset").attr("disabled","");
-						updateCoordinates();
-					},
-					error:function() {
-						$("#start_stop").attr("disabled","");
-						alert("Faild to start your program. Download again.");
-					}
+                        data:{
+                            session: $("#sessionId").val(),
+                        },
+                        success:function(response) {
+                            $("#response").html("Session "+$('#sessionId').val()+" is Running. <br><br> \
+                                If mice not moving, press <b>Show Error</b> to see the error when running Python code.");
+                            $("#reset").attr("disabled",false);
+                            updateCoordinates($("#sessionId").val());
+                            $("#showerror").show();
+                        },
+                        error:function() {
+                            $("#start_stop").attr("disabled",false);
+                            $("#response").html("Unknown error. Download again.");
+                        }
 
-				});
-			}
-		}
-	);
+                    });
+                }
+            }
+            );
 
-	$('#maze_sel').change(
-		function(event) {
-			loadMaze($('#maze_sel option:selected').text());
-		}
-	);
+        $("#showerror").click(
+            function(event) {
+                $.ajax({
+                    url:"showError.php ",
+                    type:"POST",
 
-	$('#driver_sel').change(
-		function(event) {
-			var template_file = "templates/strategy_" + 
-				$('#driver_sel option:selected').val() + ".py";
-			/* This code is not working in Firefox 4
-			 * does not update textarea if textarea has been modified.
-			$('#driver_code').load(template_file);
-			*/
-			// so we change to this version
-			$('#driver_code').load(template_file, function(){
-				myCodeMirror.setValue($('#driver_code').val());
-				myCodeMirror.setSize("100%", "90%");
-			});
+                    data:{
+                        session: $("#sessionId").val(),
+                    },
+                    success:function(response) {
+                        $("#errorPython").html(response);
+                    },
+                    error:function() {
+                        $("#response").html("Unknown error. Try again.");
+                    }
 
-			// mouse.loadDriver(driver);
-			//$("#download").html("*Download and Reset Mouse");
-			$("#start_stop").html("Download");
-			$("#start_stop").attr("disabled","");
-			$("#home").attr("disabled","disabled");
-			$("#step").attr("disabled","disabled");
-			$("#reset").attr("disabled","disabled");
-		}
-	);
+                });
+            }
+            );
+        $('#maze_sel').change(
+            function(event) {
+                loadMaze($('#maze_sel option:selected').text());
+            }
+            );
 
-	$('#home').click(mouse.home);
-	$('#reset').click(
-		function(event) {
-			$.ajax({
-				url:"stopSession.php ",
-				type:"POST",
+        $('#driver_sel').change(
+            function(event) {
+                var template_file = "templates/strategy_" + 
+                $('#driver_sel option:selected').val() + ".py";
+            /* This code is not working in Firefox 4
+             * does not update textarea if textarea has been modified.
+            $('#driver_code').load(template_file);
+            */
+            // so we change to this version
+            $('#driver_code').load(template_file, function(){
+                myCodeMirror.setValue($('#driver_code').val());
+                myCodeMirror.setSize("100%", "480px");
+            });
 
-				data:{
-					session: $("#sessionId").val(),
-				},
-				success:function(response) {
-					if (response == "Stopped") {
-						$("#response").html("Session "+$('#sessionId').val()+" Stopped.");
-						$("#start_stop").html('Download');
-						$("#start_stop").attr("disabled","");
-						$("#reset").attr("disabled","disabled");
-						removeTimer();
-					} else {
-						$("#response").html(response);
-					}
-				},
-				error:function() {
-					alert("Session failed to terminate. Please contact TA.");
-				}
+            // mouse.loadDriver(driver);
+            //$("#download").html("*Download and Reset Mouse");
+            $("#start_stop").html("Download");
+            $("#start_stop").attr("disabled",false);
+            $("#home").attr("disabled",true);
+            $("#step").attr("disabled",true);
+            $("#reset").attr("disabled",true);
+        }
+        );
 
-			});
-		}
-	);
+        $('#reset').click(
+            function(event) {
+                $.ajax({
+                    url:"stopSession.php ",
+                    type:"POST",
 
-	// value on page load
-	$("#home").attr("disabled","disabled");
-	$("#reset").attr("disabled","disabled");
+                    data:{
+                        session: $("#sessionId").val(),
+                    },
+                    success:function(response) {
+                        if (response == "Stopped") {
+                            $("#response").html("Session "+$('#sessionId').val()+" Stopped.");
+                            $("#start_stop").html('Download');
+                            $("#start_stop").attr("disabled",false);
+                            $("#reset").attr("disabled",true);
+                            $("#showerror").hide();
+                            $("#errorPython").html("");
+                            removeTimer();
+                        } else {
+                            $("#response").html(response);
+                        }
+                    },
+                    error:function() {
+                        $("#response").html("Session failed to terminate. Please use sessionManager.php to manually stop.");
+                    }
 
-	// select random maze
-	//var last_opt = $('#maze_sel option').size();
-	//var rand_maze = Math.floor(Math.random()*last_opt+1)
-	$("#maze_sel option:selected").attr('selected','selected');
-	var maze_sel = $('#maze_sel option:selected').val();
+                });
+            }
+            );
 
+    // value on page load
+    $("#reset").attr("disabled",true);
+    $("#signout").hide();
+    $("#start_stop").hide();
+    $("#reset").hide();
+    $("#showerror").hide();
 
-	newMaze($('#start_stop'), maze_sel);
-	// mouse.loadDriver(driver);
+    $("#maze_sel option:selected").attr('selected','selected');
+    var maze_sel = $('#maze_sel option:selected').val();
 
-	var maze_height = $("canvas#maze").height() + 8;
-	$("#driver_div").height(maze_height);
+    newMaze($('#start_stop'), maze_sel);
 
-	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('driver_codemirror'), {
-	  	mode: {	name: "python",
-               	version: 3,
-               	singleLineStringErrors: false,
-			  	lineNumbers: true,
-			  	lineWrapping: true},
+    var maze_height = $("canvas#maze").height() + 8;
+    $("#driver_div").height(maze_height);
+
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('driver_codemirror'), {
+        mode: { name: "python",
+        version: 3,
+        singleLineStringErrors: false,
+        lineNumbers: true,
+        lineWrapping: true},
         lineNumbers: true,
         indentUnit: 4
-	});
+    });
 
-	var template_file_strategy = "templates/strategy_multidfs.py";
-	$('#driver_code').load(template_file_strategy, function(){
-		myCodeMirror.setValue($('#driver_code').val());
-		myCodeMirror.setSize("100%", "90%");
-	});
-
-	var runCodeMirror = CodeMirror.fromTextArea(document.getElementById('run_codemirror'), {
-	  	mode: {	name: "python",
-               	version: 3,
-               	singleLineStringErrors: false,
-			  	lineNumbers: true,
-			  	lineWrapping: true},
-        lineNumbers: true,
-        indentUnit: 4
-	});
-
-	var template_file_demo = "templates/demo_core.py";
-	$('#run_code').load(template_file_demo, function(){
-		runCodeMirror.setValue($('#run_code').val());
-		runCodeMirror.setSize("100%", "90%");
-	});
-
+    var template_file_strategy = "templates/strategy_multidfs.py";
+    $('#driver_code').load(template_file_strategy, function(){
+        myCodeMirror.setValue($('#driver_code').val());
+        myCodeMirror.setSize("100%", "480px");
+    });
 
 });
 </script>
-
-
 </html>
-

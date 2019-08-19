@@ -1,0 +1,6091 @@
+node n1 {
+    type router
+    model mdr
+    network-config {
+	hostname n1
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	 ipv6 address 2001::1/128
+	 mac address 00:00:00:aa:00:00
+	!
+    }
+    canvas c1
+    iconcoords {53.0 53.0}
+    labelcoords {53.0 85.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n5}
+}
+
+node n2 {
+    type router
+    model mdr
+    network-config {
+	hostname n2
+	!
+	interface eth0
+	 ip address 10.0.0.2/24
+	 ipv6 address 2001::2/128
+	 mac address 00:00:00:aa:00:01
+	!
+    }
+    canvas c1
+    iconcoords {52.0 106.0}
+    labelcoords {52.0 138.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n5}
+}
+
+node n3 {
+    type router
+    model mdr
+    network-config {
+	hostname n3
+	!
+	interface eth0
+	 ip address 10.0.0.3/24
+	 ipv6 address 2001::3/128
+	 mac address 00:00:00:aa:00:02
+	!
+    }
+    canvas c1
+    iconcoords {103.0 106.0}
+    labelcoords {103.0 138.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n5}
+}
+
+node n4 {
+    type router
+    model mdr
+    network-config {
+	hostname n4
+	!
+	interface eth0
+	 ip address 10.0.0.4/24
+	 ipv6 address 2001::4/128
+	 mac address 00:00:00:aa:00:03
+	!
+    }
+    canvas c1
+    iconcoords {111.0 54.0}
+    labelcoords {111.0 86.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n5}
+}
+
+node n5 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan5
+	!
+	interface wireless
+	 ip address 10.0.0.0/24
+	 ipv6 address 2001::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=1500
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {76.0 79.0}
+    labelcoords {76.0 111.0}
+    interface-peer {e0 n1}
+    interface-peer {e1 n2}
+    interface-peer {e2 n3}
+    interface-peer {e3 n4}
+}
+
+node n6 {
+    type router
+    model mdr
+    network-config {
+	hostname n6
+	!
+	interface eth0
+	 ip address 10.0.1.1/24
+	 ipv6 address 2001:1::1/128
+	 mac address 00:00:00:aa:00:04
+	!
+    }
+    canvas c1
+    iconcoords {173.0 53.0}
+    labelcoords {173.0 85.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n10}
+}
+
+node n7 {
+    type router
+    model mdr
+    network-config {
+	hostname n7
+	!
+	interface eth0
+	 ip address 10.0.1.2/24
+	 ipv6 address 2001:1::2/128
+	 mac address 00:00:00:aa:00:05
+	!
+    }
+    canvas c1
+    iconcoords {219.0 53.0}
+    labelcoords {219.0 85.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n10}
+}
+
+node n8 {
+    type router
+    model mdr
+    network-config {
+	hostname n8
+	!
+	interface eth0
+	 ip address 10.0.1.3/24
+	 ipv6 address 2001:1::3/128
+	 mac address 00:00:00:aa:00:06
+	!
+    }
+    canvas c1
+    iconcoords {172.0 104.0}
+    labelcoords {172.0 136.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n10}
+}
+
+node n9 {
+    type router
+    model mdr
+    network-config {
+	hostname n9
+	!
+	interface eth0
+	 ip address 10.0.1.4/24
+	 ipv6 address 2001:1::4/128
+	 mac address 00:00:00:aa:00:07
+	!
+    }
+    canvas c1
+    iconcoords {220.0 109.0}
+    labelcoords {220.0 141.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n10}
+}
+
+node n10 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan10
+	!
+	interface wireless
+	 ip address 10.0.1.0/24
+	 ipv6 address 2001:1::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {197.0 80.0}
+    labelcoords {197.0 112.0}
+    interface-peer {e0 n6}
+    interface-peer {e1 n7}
+    interface-peer {e2 n8}
+    interface-peer {e3 n9}
+}
+
+node n11 {
+    type router
+    model mdr
+    network-config {
+	hostname n11
+	!
+	interface eth0
+	 ip address 10.0.2.1/24
+	 ipv6 address 2001:2::1/128
+	 mac address 00:00:00:aa:00:08
+	!
+    }
+    canvas c1
+    iconcoords {280.0 55.0}
+    labelcoords {280.0 87.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n15}
+}
+
+node n12 {
+    type router
+    model mdr
+    network-config {
+	hostname n12
+	!
+	interface eth0
+	 ip address 10.0.2.2/24
+	 ipv6 address 2001:2::2/128
+	 mac address 00:00:00:aa:00:09
+	!
+    }
+    canvas c1
+    iconcoords {335.0 55.0}
+    labelcoords {335.0 87.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n15}
+}
+
+node n13 {
+    type router
+    model mdr
+    network-config {
+	hostname n13
+	!
+	interface eth0
+	 ip address 10.0.2.3/24
+	 ipv6 address 2001:2::3/128
+	 mac address 00:00:00:aa:00:0a
+	!
+    }
+    canvas c1
+    iconcoords {284.0 111.0}
+    labelcoords {284.0 143.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n15}
+}
+
+node n14 {
+    type router
+    model mdr
+    network-config {
+	hostname n14
+	!
+	interface eth0
+	 ip address 10.0.2.4/24
+	 ipv6 address 2001:2::4/128
+	 mac address 00:00:00:aa:00:0b
+	!
+    }
+    canvas c1
+    iconcoords {340.0 113.0}
+    labelcoords {340.0 145.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n15}
+}
+
+node n15 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan15
+	!
+	interface wireless
+	 ip address 10.0.2.0/24
+	 ipv6 address 2001:2::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {309.0 85.0}
+    labelcoords {309.0 117.0}
+    interface-peer {e0 n11}
+    interface-peer {e1 n12}
+    interface-peer {e2 n13}
+    interface-peer {e3 n14}
+}
+
+node n16 {
+    type router
+    model mdr
+    network-config {
+	hostname n16
+	!
+	interface eth0
+	 ip address 10.0.3.1/24
+	 ipv6 address 2001:3::1/128
+	 mac address 00:00:00:aa:00:0c
+	!
+    }
+    canvas c1
+    iconcoords {396.0 56.0}
+    labelcoords {396.0 88.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n20}
+}
+
+node n17 {
+    type router
+    model mdr
+    network-config {
+	hostname n17
+	!
+	interface eth0
+	 ip address 10.0.3.2/24
+	 ipv6 address 2001:3::2/128
+	 mac address 00:00:00:aa:00:0d
+	!
+    }
+    canvas c1
+    iconcoords {449.0 55.0}
+    labelcoords {449.0 87.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n20}
+}
+
+node n18 {
+    type router
+    model mdr
+    network-config {
+	hostname n18
+	!
+	interface eth0
+	 ip address 10.0.3.3/24
+	 ipv6 address 2001:3::3/128
+	 mac address 00:00:00:aa:00:0e
+	!
+    }
+    canvas c1
+    iconcoords {399.0 115.0}
+    labelcoords {399.0 147.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n20}
+}
+
+node n19 {
+    type router
+    model mdr
+    network-config {
+	hostname n19
+	!
+	interface eth0
+	 ip address 10.0.3.4/24
+	 ipv6 address 2001:3::4/128
+	 mac address 00:00:00:aa:00:0f
+	!
+    }
+    canvas c1
+    iconcoords {451.0 115.0}
+    labelcoords {451.0 147.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n20}
+}
+
+node n20 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan20
+	!
+	interface wireless
+	 ip address 10.0.3.0/24
+	 ipv6 address 2001:3::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {426.0 90.0}
+    labelcoords {426.0 122.0}
+    interface-peer {e0 n16}
+    interface-peer {e1 n17}
+    interface-peer {e2 n18}
+    interface-peer {e3 n19}
+}
+
+node n21 {
+    type router
+    model mdr
+    network-config {
+	hostname n21
+	!
+	interface eth0
+	 ip address 10.0.4.1/24
+	 ipv6 address 2001:4::1/128
+	 mac address 00:00:00:aa:00:10
+	!
+    }
+    canvas c1
+    iconcoords {516.0 54.0}
+    labelcoords {516.0 86.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n25}
+}
+
+node n22 {
+    type router
+    model mdr
+    network-config {
+	hostname n22
+	!
+	interface eth0
+	 ip address 10.0.4.2/24
+	 ipv6 address 2001:4::2/128
+	 mac address 00:00:00:aa:00:11
+	!
+    }
+    canvas c1
+    iconcoords {567.0 54.0}
+    labelcoords {567.0 86.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n25}
+}
+
+node n23 {
+    type router
+    model mdr
+    network-config {
+	hostname n23
+	!
+	interface eth0
+	 ip address 10.0.4.3/24
+	 ipv6 address 2001:4::3/128
+	 mac address 00:00:00:aa:00:12
+	!
+    }
+    canvas c1
+    iconcoords {519.0 114.0}
+    labelcoords {519.0 146.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n25}
+}
+
+node n24 {
+    type router
+    model mdr
+    network-config {
+	hostname n24
+	!
+	interface eth0
+	 ip address 10.0.4.4/24
+	 ipv6 address 2001:4::4/128
+	 mac address 00:00:00:aa:00:13
+	!
+    }
+    canvas c1
+    iconcoords {570.0 119.0}
+    labelcoords {570.0 151.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n25}
+}
+
+node n25 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan25
+	!
+	interface wireless
+	 ip address 10.0.4.0/24
+	 ipv6 address 2001:4::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {536.0 89.0}
+    labelcoords {536.0 121.0}
+    interface-peer {e0 n21}
+    interface-peer {e1 n22}
+    interface-peer {e2 n23}
+    interface-peer {e3 n24}
+}
+
+node n26 {
+    type router
+    model mdr
+    network-config {
+	hostname n26
+	!
+	interface eth0
+	 ip address 10.0.5.1/24
+	 ipv6 address 2001:5::1/128
+	 mac address 00:00:00:aa:00:14
+	!
+    }
+    canvas c1
+    iconcoords {629.0 56.0}
+    labelcoords {629.0 88.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n30}
+}
+
+node n27 {
+    type router
+    model mdr
+    network-config {
+	hostname n27
+	!
+	interface eth0
+	 ip address 10.0.5.2/24
+	 ipv6 address 2001:5::2/128
+	 mac address 00:00:00:aa:00:15
+	!
+    }
+    canvas c1
+    iconcoords {680.0 55.0}
+    labelcoords {680.0 87.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n30}
+}
+
+node n28 {
+    type router
+    model mdr
+    network-config {
+	hostname n28
+	!
+	interface eth0
+	 ip address 10.0.5.3/24
+	 ipv6 address 2001:5::3/128
+	 mac address 00:00:00:aa:00:16
+	!
+    }
+    canvas c1
+    iconcoords {634.0 118.0}
+    labelcoords {634.0 150.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n30}
+}
+
+node n29 {
+    type router
+    model mdr
+    network-config {
+	hostname n29
+	!
+	interface eth0
+	 ip address 10.0.5.4/24
+	 ipv6 address 2001:5::4/128
+	 mac address 00:00:00:aa:00:17
+	!
+    }
+    canvas c1
+    iconcoords {685.0 121.0}
+    labelcoords {685.0 153.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n30}
+}
+
+node n30 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan30
+	!
+	interface wireless
+	 ip address 10.0.5.0/24
+	 ipv6 address 2001:5::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {657.0 90.0}
+    labelcoords {657.0 122.0}
+    interface-peer {e0 n26}
+    interface-peer {e1 n27}
+    interface-peer {e2 n28}
+    interface-peer {e3 n29}
+}
+
+node n31 {
+    type router
+    model mdr
+    network-config {
+	hostname n31
+	!
+	interface eth0
+	 ip address 10.0.6.1/24
+	 ipv6 address 2001:6::1/128
+	 mac address 00:00:00:aa:00:18
+	!
+    }
+    canvas c1
+    iconcoords {743.0 53.0}
+    labelcoords {743.0 85.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n35}
+}
+
+node n32 {
+    type router
+    model mdr
+    network-config {
+	hostname n32
+	!
+	interface eth0
+	 ip address 10.0.6.2/24
+	 ipv6 address 2001:6::2/128
+	 mac address 00:00:00:aa:00:19
+	!
+    }
+    canvas c1
+    iconcoords {797.0 55.0}
+    labelcoords {797.0 87.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n35}
+}
+
+node n33 {
+    type router
+    model mdr
+    network-config {
+	hostname n33
+	!
+	interface eth0
+	 ip address 10.0.6.3/24
+	 ipv6 address 2001:6::3/128
+	 mac address 00:00:00:aa:00:1a
+	!
+    }
+    canvas c1
+    iconcoords {744.0 121.0}
+    labelcoords {744.0 153.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n35}
+}
+
+node n34 {
+    type router
+    model mdr
+    network-config {
+	hostname n34
+	!
+	interface eth0
+	 ip address 10.0.6.4/24
+	 ipv6 address 2001:6::4/128
+	 mac address 00:00:00:aa:00:1b
+	!
+    }
+    canvas c1
+    iconcoords {798.0 125.0}
+    labelcoords {798.0 157.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n35}
+}
+
+node n35 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan35
+	!
+	interface wireless
+	 ip address 10.0.6.0/24
+	 ipv6 address 2001:6::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {769.0 90.0}
+    labelcoords {769.0 122.0}
+    interface-peer {e0 n31}
+    interface-peer {e1 n32}
+    interface-peer {e2 n33}
+    interface-peer {e3 n34}
+}
+
+node n36 {
+    type router
+    model mdr
+    network-config {
+	hostname n36
+	!
+	interface eth0
+	 ip address 10.0.7.1/24
+	 ipv6 address 2001:7::1/128
+	 mac address 00:00:00:aa:00:1c
+	!
+    }
+    canvas c1
+    iconcoords {861.0 57.0}
+    labelcoords {861.0 89.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n40}
+}
+
+node n37 {
+    type router
+    model mdr
+    network-config {
+	hostname n37
+	!
+	interface eth0
+	 ip address 10.0.7.2/24
+	 ipv6 address 2001:7::2/128
+	 mac address 00:00:00:aa:00:1d
+	!
+    }
+    canvas c1
+    iconcoords {920.0 55.0}
+    labelcoords {920.0 87.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n40}
+}
+
+node n38 {
+    type router
+    model mdr
+    network-config {
+	hostname n38
+	!
+	interface eth0
+	 ip address 10.0.7.3/24
+	 ipv6 address 2001:7::3/128
+	 mac address 00:00:00:aa:00:1e
+	!
+    }
+    canvas c1
+    iconcoords {863.0 124.0}
+    labelcoords {863.0 156.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n40}
+}
+
+node n39 {
+    type router
+    model mdr
+    network-config {
+	hostname n39
+	!
+	interface eth0
+	 ip address 10.0.7.4/24
+	 ipv6 address 2001:7::4/128
+	 mac address 00:00:00:aa:00:1f
+	!
+    }
+    canvas c1
+    iconcoords {923.0 127.0}
+    labelcoords {923.0 159.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n40}
+}
+
+node n40 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan40
+	!
+	interface wireless
+	 ip address 10.0.7.0/24
+	 ipv6 address 2001:7::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {888.0 90.0}
+    labelcoords {891.0 107.0}
+    interface-peer {e0 n36}
+    interface-peer {e1 n37}
+    interface-peer {e2 n38}
+    interface-peer {e3 n39}
+}
+
+node n41 {
+    type router
+    model mdr
+    network-config {
+	hostname n41
+	!
+	interface eth0
+	 ip address 10.0.8.1/24
+	 ipv6 address 2001:8::1/128
+	 mac address 00:00:00:aa:00:20
+	!
+    }
+    canvas c1
+    iconcoords {987.0 56.0}
+    labelcoords {987.0 88.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n45}
+}
+
+node n42 {
+    type router
+    model mdr
+    network-config {
+	hostname n42
+	!
+	interface eth0
+	 ip address 10.0.8.2/24
+	 ipv6 address 2001:8::2/128
+	 mac address 00:00:00:aa:00:21
+	!
+    }
+    canvas c1
+    iconcoords {1043.0 54.0}
+    labelcoords {1043.0 86.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n45}
+}
+
+node n43 {
+    type router
+    model mdr
+    network-config {
+	hostname n43
+	!
+	interface eth0
+	 ip address 10.0.8.3/24
+	 ipv6 address 2001:8::3/128
+	 mac address 00:00:00:aa:00:22
+	!
+    }
+    canvas c1
+    iconcoords {988.0 123.0}
+    labelcoords {988.0 155.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n45}
+}
+
+node n44 {
+    type router
+    model mdr
+    network-config {
+	hostname n44
+	!
+	interface eth0
+	 ip address 10.0.8.4/24
+	 ipv6 address 2001:8::4/128
+	 mac address 00:00:00:aa:00:23
+	!
+    }
+    canvas c1
+    iconcoords {1046.0 124.0}
+    labelcoords {1046.0 156.0}
+    services {zebra OSPFv3MDR vtysh IPForward}
+    interface-peer {eth0 n45}
+}
+
+node n45 {
+    delay 20000
+    bandwidth 54000000
+    type wlan
+    network-config {
+	hostname wlan45
+	!
+	interface wireless
+	 ip address 10.0.8.0/24
+	 ipv6 address 2001:8::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1014.0 95.0}
+    labelcoords {1014.0 127.0}
+    interface-peer {e0 n41}
+    interface-peer {e1 n42}
+    interface-peer {e2 n43}
+    interface-peer {e3 n44}
+}
+
+node n46 {
+    type router
+    model mdr
+    network-config {
+	hostname n46
+	!
+	interface eth0
+	 ipv6 address 2001:0::1/128
+	 ip address 10.0.9.1/24
+	!
+    }
+    canvas c1
+    iconcoords {1098.0 53.0}
+    labelcoords {1098.0 85.0}
+    interface-peer {eth0 n50}
+}
+
+node n47 {
+    type router
+    model mdr
+    network-config {
+	hostname n47
+	!
+	interface eth0
+	 ipv6 address 2001:0::2/128
+	 ip address 10.0.9.2/24
+	!
+    }
+    canvas c1
+    iconcoords {1150.0 51.0}
+    labelcoords {1150.0 83.0}
+    interface-peer {eth0 n50}
+}
+
+node n48 {
+    type router
+    model mdr
+    network-config {
+	hostname n48
+	!
+	interface eth0
+	 ipv6 address 2001:0::3/128
+	 ip address 10.0.9.3/24
+	!
+    }
+    canvas c1
+    iconcoords {1098.0 122.0}
+    labelcoords {1098.0 154.0}
+    interface-peer {eth0 n50}
+}
+
+node n49 {
+    type router
+    model mdr
+    network-config {
+	hostname n49
+	!
+	interface eth0
+	 ipv6 address 2001:0::4/128
+	 ip address 10.0.9.4/24
+	!
+    }
+    canvas c1
+    iconcoords {1154.0 121.0}
+    labelcoords {1154.0 153.0}
+    interface-peer {eth0 n50}
+}
+
+node n50 {
+    type wlan
+    network-config {
+	hostname wlan50
+	!
+	interface wireless
+	 ipv6 address 2001:0::0/128
+	 ip address 10.0.9.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1122.0 88.0}
+    labelcoords {1122.0 120.0}
+    interface-peer {e0 n46}
+    interface-peer {e1 n47}
+    interface-peer {e2 n48}
+    interface-peer {e3 n49}
+}
+
+node n51 {
+    type router
+    model mdr
+    network-config {
+	hostname n51
+	!
+	interface eth0
+	 ipv6 address 2001:9::1/128
+	 ip address 10.0.10.1/24
+	!
+    }
+    canvas c1
+    iconcoords {48.0 159.0}
+    labelcoords {48.0 191.0}
+    interface-peer {eth0 n55}
+}
+
+node n52 {
+    type router
+    model mdr
+    network-config {
+	hostname n52
+	!
+	interface eth0
+	 ipv6 address 2001:9::3/128
+	 ip address 10.0.10.3/24
+	!
+    }
+    canvas c1
+    iconcoords {44.0 214.0}
+    labelcoords {44.0 246.0}
+    interface-peer {eth0 n55}
+}
+
+node n53 {
+    type router
+    model mdr
+    network-config {
+	hostname n53
+	!
+	interface eth0
+	 ipv6 address 2001:9::4/128
+	 ip address 10.0.10.4/24
+	!
+    }
+    canvas c1
+    iconcoords {106.0 217.0}
+    labelcoords {106.0 249.0}
+    interface-peer {eth0 n55}
+}
+
+node n54 {
+    type router
+    model mdr
+    network-config {
+	hostname n54
+	!
+	interface eth0
+	 ipv6 address 2001:9::2/128
+	 ip address 10.0.10.2/24
+	!
+    }
+    canvas c1
+    iconcoords {103.0 162.0}
+    labelcoords {103.0 194.0}
+    interface-peer {eth0 n55}
+}
+
+node n55 {
+    type wlan
+    network-config {
+	hostname wlan55
+	!
+	interface wireless
+	 ipv6 address 2001:9::0/128
+	 ip address 10.0.10.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {72.0 193.0}
+    labelcoords {72.0 225.0}
+    interface-peer {e0 n51}
+    interface-peer {e1 n54}
+    interface-peer {e2 n52}
+    interface-peer {e3 n53}
+}
+
+node n56 {
+    type router
+    model mdr
+    network-config {
+	hostname n56
+	!
+	interface eth0
+	 ipv6 address 2001:10::1/128
+	 ip address 10.0.11.1/24
+	!
+    }
+    canvas c1
+    iconcoords {168.0 165.0}
+    labelcoords {168.0 197.0}
+    interface-peer {eth0 n60}
+}
+
+node n57 {
+    type router
+    model mdr
+    network-config {
+	hostname n57
+	!
+	interface eth0
+	 ipv6 address 2001:10::3/128
+	 ip address 10.0.11.3/24
+	!
+    }
+    canvas c1
+    iconcoords {167.0 218.0}
+    labelcoords {167.0 250.0}
+    interface-peer {eth0 n60}
+}
+
+node n58 {
+    type router
+    model mdr
+    network-config {
+	hostname n58
+	!
+	interface eth0
+	 ipv6 address 2001:10::4/128
+	 ip address 10.0.11.4/24
+	!
+    }
+    canvas c1
+    iconcoords {222.0 221.0}
+    labelcoords {222.0 253.0}
+    interface-peer {eth0 n60}
+}
+
+node n59 {
+    type router
+    model mdr
+    network-config {
+	hostname n59
+	!
+	interface eth0
+	 ipv6 address 2001:10::2/128
+	 ip address 10.0.11.2/24
+	!
+    }
+    canvas c1
+    iconcoords {222.0 167.0}
+    labelcoords {222.0 199.0}
+    interface-peer {eth0 n60}
+}
+
+node n60 {
+    type wlan
+    network-config {
+	hostname wlan60
+	!
+	interface wireless
+	 ipv6 address 2001:10::0/128
+	 ip address 10.0.11.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {198.0 193.0}
+    labelcoords {198.0 225.0}
+    interface-peer {e0 n56}
+    interface-peer {e1 n59}
+    interface-peer {e2 n57}
+    interface-peer {e3 n58}
+}
+
+node n61 {
+    type router
+    model mdr
+    network-config {
+	hostname n61
+	!
+	interface eth0
+	 ipv6 address 2001:11::1/128
+	 ip address 10.0.12.1/24
+	!
+    }
+    canvas c1
+    iconcoords {288.0 171.0}
+    labelcoords {288.0 203.0}
+    interface-peer {eth0 n65}
+}
+
+node n62 {
+    type router
+    model mdr
+    network-config {
+	hostname n62
+	!
+	interface eth0
+	 ipv6 address 2001:11::3/128
+	 ip address 10.0.12.3/24
+	!
+    }
+    canvas c1
+    iconcoords {289.0 226.0}
+    labelcoords {289.0 258.0}
+    interface-peer {eth0 n65}
+}
+
+node n63 {
+    type router
+    model mdr
+    network-config {
+	hostname n63
+	!
+	interface eth0
+	 ipv6 address 2001:11::4/128
+	 ip address 10.0.12.4/24
+	!
+    }
+    canvas c1
+    iconcoords {347.0 227.0}
+    labelcoords {347.0 259.0}
+    interface-peer {eth0 n65}
+}
+
+node n64 {
+    type router
+    model mdr
+    network-config {
+	hostname n64
+	!
+	interface eth0
+	 ipv6 address 2001:11::2/128
+	 ip address 10.0.12.2/24
+	!
+    }
+    canvas c1
+    iconcoords {347.0 171.0}
+    labelcoords {347.0 203.0}
+    interface-peer {eth0 n65}
+}
+
+node n65 {
+    type wlan
+    network-config {
+	hostname wlan65
+	!
+	interface wireless
+	 ipv6 address 2001:11::0/128
+	 ip address 10.0.12.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {318.0 200.0}
+    labelcoords {318.0 232.0}
+    interface-peer {e0 n61}
+    interface-peer {e1 n64}
+    interface-peer {e2 n62}
+    interface-peer {e3 n63}
+}
+
+node n66 {
+    type router
+    model mdr
+    network-config {
+	hostname n66
+	!
+	interface eth0
+	 ipv6 address 2001:12::1/128
+	 ip address 10.0.13.1/24
+	!
+    }
+    canvas c1
+    iconcoords {408.0 176.0}
+    labelcoords {408.0 208.0}
+    interface-peer {eth0 n70}
+}
+
+node n67 {
+    type router
+    model mdr
+    network-config {
+	hostname n67
+	!
+	interface eth0
+	 ipv6 address 2001:12::3/128
+	 ip address 10.0.13.3/24
+	!
+    }
+    canvas c1
+    iconcoords {405.0 230.0}
+    labelcoords {405.0 262.0}
+    interface-peer {eth0 n70}
+}
+
+node n68 {
+    type router
+    model mdr
+    network-config {
+	hostname n68
+	!
+	interface eth0
+	 ipv6 address 2001:12::4/128
+	 ip address 10.0.13.4/24
+	!
+    }
+    canvas c1
+    iconcoords {460.0 233.0}
+    labelcoords {460.0 265.0}
+    interface-peer {eth0 n70}
+}
+
+node n69 {
+    type router
+    model mdr
+    network-config {
+	hostname n69
+	!
+	interface eth0
+	 ipv6 address 2001:12::2/128
+	 ip address 10.0.13.2/24
+	!
+    }
+    canvas c1
+    iconcoords {458.0 175.0}
+    labelcoords {458.0 207.0}
+    interface-peer {eth0 n70}
+}
+
+node n70 {
+    type wlan
+    network-config {
+	hostname wlan70
+	!
+	interface wireless
+	 ipv6 address 2001:12::0/128
+	 ip address 10.0.13.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {436.0 204.0}
+    labelcoords {436.0 236.0}
+    interface-peer {e0 n66}
+    interface-peer {e1 n69}
+    interface-peer {e2 n67}
+    interface-peer {e3 n68}
+}
+
+node n71 {
+    type router
+    model mdr
+    network-config {
+	hostname n71
+	!
+	interface eth0
+	 ip address 10.0.14.1/24
+	 ipv6 address 2001:13::1/128
+	!
+    }
+    canvas c1
+    iconcoords {518.0 181.0}
+    labelcoords {518.0 213.0}
+    interface-peer {eth0 n75}
+}
+
+node n72 {
+    type router
+    model mdr
+    network-config {
+	hostname n72
+	!
+	interface eth0
+	 ip address 10.0.14.3/24
+	 ipv6 address 2001:13::3/128
+	!
+    }
+    canvas c1
+    iconcoords {523.0 232.0}
+    labelcoords {523.0 264.0}
+    interface-peer {eth0 n75}
+}
+
+node n73 {
+    type router
+    model mdr
+    network-config {
+	hostname n73
+	!
+	interface eth0
+	 ip address 10.0.14.4/24
+	 ipv6 address 2001:13::4/128
+	!
+    }
+    canvas c1
+    iconcoords {578.0 229.0}
+    labelcoords {578.0 261.0}
+    interface-peer {eth0 n75}
+}
+
+node n74 {
+    type router
+    model mdr
+    network-config {
+	hostname n74
+	!
+	interface eth0
+	 ip address 10.0.14.2/24
+	 ipv6 address 2001:13::2/128
+	!
+    }
+    canvas c1
+    iconcoords {575.0 182.0}
+    labelcoords {575.0 214.0}
+    interface-peer {eth0 n75}
+}
+
+node n75 {
+    type wlan
+    network-config {
+	hostname wlan75
+	!
+	interface wireless
+	 ip address 10.0.14.0/24
+	 ipv6 address 2001:13::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {541.0 202.0}
+    labelcoords {541.0 234.0}
+    interface-peer {e0 n71}
+    interface-peer {e1 n74}
+    interface-peer {e2 n72}
+    interface-peer {e3 n73}
+}
+
+node n76 {
+    type router
+    model mdr
+    network-config {
+	hostname n76
+	!
+	interface eth0
+	 ip address 10.0.15.1/24
+	 ipv6 address 2001:14::1/128
+	!
+    }
+    canvas c1
+    iconcoords {638.0 184.0}
+    labelcoords {638.0 216.0}
+    interface-peer {eth0 n80}
+}
+
+node n77 {
+    type router
+    model mdr
+    network-config {
+	hostname n77
+	!
+	interface eth0
+	 ip address 10.0.15.3/24
+	 ipv6 address 2001:14::3/128
+	!
+    }
+    canvas c1
+    iconcoords {640.0 235.0}
+    labelcoords {640.0 267.0}
+    interface-peer {eth0 n80}
+}
+
+node n78 {
+    type router
+    model mdr
+    network-config {
+	hostname n78
+	!
+	interface eth0
+	 ip address 10.0.15.4/24
+	 ipv6 address 2001:14::4/128
+	!
+    }
+    canvas c1
+    iconcoords {693.0 235.0}
+    labelcoords {693.0 267.0}
+    interface-peer {eth0 n80}
+}
+
+node n79 {
+    type router
+    model mdr
+    network-config {
+	hostname n79
+	!
+	interface eth0
+	 ip address 10.0.15.2/24
+	 ipv6 address 2001:14::2/128
+	!
+    }
+    canvas c1
+    iconcoords {692.0 184.0}
+    labelcoords {692.0 216.0}
+    interface-peer {eth0 n80}
+}
+
+node n80 {
+    type wlan
+    network-config {
+	hostname wlan80
+	!
+	interface wireless
+	 ip address 10.0.15.0/24
+	 ipv6 address 2001:14::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {656.0 209.0}
+    labelcoords {663.0 240.0}
+    interface-peer {e0 n76}
+    interface-peer {e1 n79}
+    interface-peer {e2 n77}
+    interface-peer {e3 n78}
+}
+
+node n81 {
+    type router
+    model mdr
+    network-config {
+	hostname n81
+	!
+	interface eth0
+	 ip address 10.0.16.1/24
+	 ipv6 address 2001:15::1/128
+	!
+    }
+    canvas c1
+    iconcoords {751.0 187.0}
+    labelcoords {751.0 219.0}
+    interface-peer {eth0 n85}
+}
+
+node n82 {
+    type router
+    model mdr
+    network-config {
+	hostname n82
+	!
+	interface eth0
+	 ip address 10.0.16.3/24
+	 ipv6 address 2001:15::3/128
+	!
+    }
+    canvas c1
+    iconcoords {755.0 238.0}
+    labelcoords {755.0 270.0}
+    interface-peer {eth0 n85}
+}
+
+node n83 {
+    type router
+    model mdr
+    network-config {
+	hostname n83
+	!
+	interface eth0
+	 ip address 10.0.16.4/24
+	 ipv6 address 2001:15::4/128
+	!
+    }
+    canvas c1
+    iconcoords {809.0 237.0}
+    labelcoords {809.0 269.0}
+    interface-peer {eth0 n85}
+}
+
+node n84 {
+    type router
+    model mdr
+    network-config {
+	hostname n84
+	!
+	interface eth0
+	 ip address 10.0.16.2/24
+	 ipv6 address 2001:15::2/128
+	!
+    }
+    canvas c1
+    iconcoords {804.0 183.0}
+    labelcoords {804.0 215.0}
+    interface-peer {eth0 n85}
+}
+
+node n85 {
+    type wlan
+    network-config {
+	hostname wlan85
+	!
+	interface wireless
+	 ip address 10.0.16.0/24
+	 ipv6 address 2001:15::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {770.0 204.0}
+    labelcoords {770.0 236.0}
+    interface-peer {e0 n81}
+    interface-peer {e1 n84}
+    interface-peer {e2 n82}
+    interface-peer {e3 n83}
+}
+
+node n86 {
+    type router
+    model mdr
+    network-config {
+	hostname n86
+	!
+	interface eth0
+	 ip address 10.0.17.1/24
+	 ipv6 address 2001:16::1/128
+	!
+    }
+    canvas c1
+    iconcoords {868.0 185.0}
+    labelcoords {868.0 217.0}
+    interface-peer {eth0 n90}
+}
+
+node n87 {
+    type router
+    model mdr
+    network-config {
+	hostname n87
+	!
+	interface eth0
+	 ip address 10.0.17.3/24
+	 ipv6 address 2001:16::3/128
+	!
+    }
+    canvas c1
+    iconcoords {872.0 238.0}
+    labelcoords {872.0 270.0}
+    interface-peer {eth0 n90}
+}
+
+node n88 {
+    type router
+    model mdr
+    network-config {
+	hostname n88
+	!
+	interface eth0
+	 ip address 10.0.17.4/24
+	 ipv6 address 2001:16::4/128
+	!
+    }
+    canvas c1
+    iconcoords {930.0 239.0}
+    labelcoords {930.0 271.0}
+    interface-peer {eth0 n90}
+}
+
+node n89 {
+    type router
+    model mdr
+    network-config {
+	hostname n89
+	!
+	interface eth0
+	 ip address 10.0.17.2/24
+	 ipv6 address 2001:16::2/128
+	!
+    }
+    canvas c1
+    iconcoords {927.0 186.0}
+    labelcoords {927.0 218.0}
+    interface-peer {eth0 n90}
+}
+
+node n90 {
+    type wlan
+    network-config {
+	hostname wlan90
+	!
+	interface wireless
+	 ip address 10.0.17.0/24
+	 ipv6 address 2001:16::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {895.0 211.0}
+    labelcoords {899.0 242.0}
+    interface-peer {e0 n86}
+    interface-peer {e1 n89}
+    interface-peer {e2 n87}
+    interface-peer {e3 n88}
+}
+
+node n91 {
+    type router
+    model mdr
+    network-config {
+	hostname n91
+	!
+	interface eth0
+	 ip address 10.0.18.1/24
+	 ipv6 address 2001:17::1/128
+	!
+    }
+    canvas c1
+    iconcoords {989.0 187.0}
+    labelcoords {989.0 219.0}
+    interface-peer {eth0 n95}
+}
+
+node n92 {
+    type router
+    model mdr
+    network-config {
+	hostname n92
+	!
+	interface eth0
+	 ip address 10.0.18.3/24
+	 ipv6 address 2001:17::3/128
+	!
+    }
+    canvas c1
+    iconcoords {994.0 242.0}
+    labelcoords {994.0 274.0}
+    interface-peer {eth0 n95}
+}
+
+node n93 {
+    type router
+    model mdr
+    network-config {
+	hostname n93
+	!
+	interface eth0
+	 ip address 10.0.18.4/24
+	 ipv6 address 2001:17::4/128
+	!
+    }
+    canvas c1
+    iconcoords {1054.0 242.0}
+    labelcoords {1054.0 274.0}
+    interface-peer {eth0 n95}
+}
+
+node n94 {
+    type router
+    model mdr
+    network-config {
+	hostname n94
+	!
+	interface eth0
+	 ip address 10.0.18.2/24
+	 ipv6 address 2001:17::2/128
+	!
+    }
+    canvas c1
+    iconcoords {1049.0 187.0}
+    labelcoords {1049.0 219.0}
+    interface-peer {eth0 n95}
+}
+
+node n95 {
+    type wlan
+    network-config {
+	hostname wlan95
+	!
+	interface wireless
+	 ip address 10.0.18.0/24
+	 ipv6 address 2001:17::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1026.0 211.0}
+    labelcoords {1026.0 243.0}
+    interface-peer {e0 n91}
+    interface-peer {e1 n94}
+    interface-peer {e2 n92}
+    interface-peer {e3 n93}
+}
+
+node n96 {
+    type router
+    model mdr
+    network-config {
+	hostname n96
+	!
+	interface eth0
+	 ip address 10.0.19.1/24
+	 ipv6 address 2001:18::1/128
+	!
+    }
+    canvas c1
+    iconcoords {1107.0 186.0}
+    labelcoords {1107.0 218.0}
+    interface-peer {eth0 n100}
+}
+
+node n97 {
+    type router
+    model mdr
+    network-config {
+	hostname n97
+	!
+	interface eth0
+	 ip address 10.0.19.4/24
+	 ipv6 address 2001:18::4/128
+	!
+    }
+    canvas c1
+    iconcoords {1118.0 243.0}
+    labelcoords {1118.0 275.0}
+    interface-peer {eth0 n100}
+}
+
+node n98 {
+    type router
+    model mdr
+    network-config {
+	hostname n98
+	!
+	interface eth0
+	 ip address 10.0.19.3/24
+	 ipv6 address 2001:18::3/128
+	!
+    }
+    canvas c1
+    iconcoords {1166.0 243.0}
+    labelcoords {1166.0 275.0}
+    interface-peer {eth0 n100}
+}
+
+node n99 {
+    type router
+    model mdr
+    network-config {
+	hostname n99
+	!
+	interface eth0
+	 ip address 10.0.19.2/24
+	 ipv6 address 2001:18::2/128
+	!
+    }
+    canvas c1
+    iconcoords {1163.0 186.0}
+    labelcoords {1163.0 218.0}
+    interface-peer {eth0 n100}
+}
+
+node n100 {
+    type wlan
+    network-config {
+	hostname wlan100
+	!
+	interface wireless
+	 ip address 10.0.19.0/24
+	 ipv6 address 2001:18::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1140.0 216.0}
+    labelcoords {1137.0 247.0}
+    interface-peer {e0 n96}
+    interface-peer {e1 n99}
+    interface-peer {e2 n98}
+    interface-peer {e3 n97}
+}
+
+node n101 {
+    type router
+    model mdr
+    network-config {
+	hostname n101
+	!
+	interface eth1
+	 ipv6 address 2001:20::1/128
+	 ip address 10.0.20.1/24
+	!
+    }
+    canvas c1
+    iconcoords {48.0 278.0}
+    labelcoords {48.0 310.0}
+    interface-peer {eth1 n105}
+}
+
+node n102 {
+    type router
+    model mdr
+    network-config {
+	hostname n102
+	!
+	interface eth0
+	 ipv6 address 2001:20::3/128
+	 ip address 10.0.20.3/24
+	!
+    }
+    canvas c1
+    iconcoords {50.0 326.0}
+    labelcoords {50.0 358.0}
+    interface-peer {eth0 n105}
+}
+
+node n104 {
+    type router
+    model mdr
+    network-config {
+	hostname n104
+	!
+	interface eth0
+	 ipv6 address 2001:20::2/128
+	 ip address 10.0.20.2/24
+	!
+    }
+    canvas c1
+    iconcoords {103.0 289.0}
+    labelcoords {103.0 321.0}
+    interface-peer {eth0 n105}
+}
+
+node n105 {
+    type wlan
+    network-config {
+	hostname wlan105
+	!
+	interface wireless
+	 ipv6 address 2001:20::0/128
+	 ip address 10.0.20.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {76.0 315.0}
+    labelcoords {76.0 347.0}
+    interface-peer {e0 n101}
+    interface-peer {e1 n104}
+    interface-peer {e2 n102}
+    interface-peer {e3 n103}
+}
+
+node n106 {
+    type router
+    model mdr
+    network-config {
+	hostname n106
+	!
+	interface eth0
+	 ipv6 address 2001:21::1/128
+	 ip address 10.0.21.1/24
+	!
+    }
+    canvas c1
+    iconcoords {173.0 284.0}
+    labelcoords {173.0 316.0}
+    interface-peer {eth0 n110}
+}
+
+node n107 {
+    type router
+    model mdr
+    network-config {
+	hostname n107
+	!
+	interface eth0
+	 ipv6 address 2001:21::4/128
+	 ip address 10.0.21.4/24
+	!
+    }
+    canvas c1
+    iconcoords {177.0 331.0}
+    labelcoords {177.0 363.0}
+    interface-peer {eth0 n110}
+}
+
+node n108 {
+    type router
+    model mdr
+    network-config {
+	hostname n108
+	!
+	interface eth0
+	 ipv6 address 2001:21::3/128
+	 ip address 10.0.21.3/24
+	!
+    }
+    canvas c1
+    iconcoords {222.0 330.0}
+    labelcoords {222.0 362.0}
+    interface-peer {eth0 n110}
+}
+
+node n109 {
+    type router
+    model mdr
+    network-config {
+	hostname n109
+	!
+	interface eth0
+	 ipv6 address 2001:21::2/128
+	 ip address 10.0.21.2/24
+	!
+    }
+    canvas c1
+    iconcoords {221.0 282.0}
+    labelcoords {221.0 314.0}
+    interface-peer {eth0 n110}
+}
+
+node n110 {
+    type wlan
+    network-config {
+	hostname wlan110
+	!
+	interface wireless
+	 ipv6 address 2001:21::0/128
+	 ip address 10.0.21.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {194.0 307.0}
+    labelcoords {194.0 339.0}
+    interface-peer {e0 n106}
+    interface-peer {e1 n109}
+    interface-peer {e2 n108}
+    interface-peer {e3 n107}
+}
+
+node n111 {
+    type router
+    model mdr
+    network-config {
+	hostname n111
+	!
+	interface eth0
+	 ipv6 address 2001:22::1/128
+	 ip address 10.0.22.1/24
+	!
+    }
+    canvas c1
+    iconcoords {297.0 290.0}
+    labelcoords {297.0 322.0}
+    interface-peer {eth0 n115}
+}
+
+node n112 {
+    type router
+    model mdr
+    network-config {
+	hostname n112
+	!
+	interface eth0
+	 ipv6 address 2001:22::3/128
+	 ip address 10.0.22.3/24
+	!
+    }
+    canvas c1
+    iconcoords {302.0 340.0}
+    labelcoords {302.0 372.0}
+    interface-peer {eth0 n115}
+}
+
+node n113 {
+    type router
+    model mdr
+    network-config {
+	hostname n113
+	!
+	interface eth0
+	 ipv6 address 2001:22::4/128
+	 ip address 10.0.22.4/24
+	!
+    }
+    canvas c1
+    iconcoords {359.0 338.0}
+    labelcoords {359.0 370.0}
+    interface-peer {eth0 n115}
+}
+
+node n114 {
+    type router
+    model mdr
+    network-config {
+	hostname n114
+	!
+	interface eth0
+	 ipv6 address 2001:22::2/128
+	 ip address 10.0.22.2/24
+	!
+    }
+    canvas c1
+    iconcoords {349.0 291.0}
+    labelcoords {349.0 323.0}
+    interface-peer {eth0 n115}
+}
+
+node n115 {
+    type wlan
+    network-config {
+	hostname wlan115
+	!
+	interface wireless
+	 ipv6 address 2001:22::0/128
+	 ip address 10.0.22.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {319.0 312.0}
+    labelcoords {319.0 344.0}
+    interface-peer {e0 n111}
+    interface-peer {e1 n114}
+    interface-peer {e2 n112}
+    interface-peer {e3 n113}
+}
+
+node n116 {
+    type router
+    model mdr
+    network-config {
+	hostname n116
+	!
+	interface eth0
+	 ipv6 address 2001:23::1/128
+	 ip address 10.0.23.1/24
+	!
+    }
+    canvas c1
+    iconcoords {411.0 290.0}
+    labelcoords {411.0 322.0}
+    interface-peer {eth0 n120}
+}
+
+node n117 {
+    type router
+    model mdr
+    network-config {
+	hostname n117
+	!
+	interface eth0
+	 ipv6 address 2001:23::3/128
+	 ip address 10.0.23.3/24
+	!
+    }
+    canvas c1
+    iconcoords {420.0 338.0}
+    labelcoords {420.0 370.0}
+    interface-peer {eth0 n120}
+}
+
+node n118 {
+    type router
+    model mdr
+    network-config {
+	hostname n118
+	!
+	interface eth0
+	 ipv6 address 2001:23::4/128
+	 ip address 10.0.23.4/24
+	!
+    }
+    canvas c1
+    iconcoords {468.0 341.0}
+    labelcoords {468.0 373.0}
+    interface-peer {eth0 n120}
+}
+
+node n119 {
+    type router
+    model mdr
+    network-config {
+	hostname n119
+	!
+	interface eth0
+	 ipv6 address 2001:23::2/128
+	 ip address 10.0.23.2/24
+	!
+    }
+    canvas c1
+    iconcoords {467.0 299.0}
+    labelcoords {467.0 331.0}
+    interface-peer {eth0 n120}
+}
+
+node n120 {
+    type wlan
+    network-config {
+	hostname wlan120
+	!
+	interface wireless
+	 ipv6 address 2001:23::0/128
+	 ip address 10.0.23.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {432.0 312.0}
+    labelcoords {432.0 344.0}
+    interface-peer {e0 n116}
+    interface-peer {e1 n119}
+    interface-peer {e2 n117}
+    interface-peer {e3 n118}
+}
+
+node n121 {
+    type router
+    model mdr
+    network-config {
+	hostname n121
+	!
+	interface eth0
+	 ipv6 address 2001:24::1/128
+	 ip address 10.0.24.1/24
+	!
+    }
+    canvas c1
+    iconcoords {533.0 289.0}
+    labelcoords {533.0 321.0}
+    interface-peer {eth0 n125}
+}
+
+node n122 {
+    type router
+    model mdr
+    network-config {
+	hostname n122
+	!
+	interface eth0
+	 ipv6 address 2001:24::4/128
+	 ip address 10.0.24.4/24
+	!
+    }
+    canvas c1
+    iconcoords {538.0 344.0}
+    labelcoords {538.0 376.0}
+    interface-peer {eth0 n125}
+}
+
+node n123 {
+    type router
+    model mdr
+    network-config {
+	hostname n123
+	!
+	interface eth0
+	 ipv6 address 2001:24::3/128
+	 ip address 10.0.24.3/24
+	!
+    }
+    canvas c1
+    iconcoords {590.0 347.0}
+    labelcoords {590.0 379.0}
+    interface-peer {eth0 n125}
+}
+
+node n124 {
+    type router
+    model mdr
+    network-config {
+	hostname n124
+	!
+	interface eth0
+	 ipv6 address 2001:24::2/128
+	 ip address 10.0.24.2/24
+	!
+    }
+    canvas c1
+    iconcoords {588.0 287.0}
+    labelcoords {588.0 319.0}
+    interface-peer {eth0 n125}
+}
+
+node n125 {
+    type wlan
+    network-config {
+	hostname wlan125
+	!
+	interface wireless
+	 ipv6 address 2001:24::0/128
+	 ip address 10.0.24.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {558.0 318.0}
+    labelcoords {558.0 350.0}
+    interface-peer {e0 n121}
+    interface-peer {e1 n124}
+    interface-peer {e2 n123}
+    interface-peer {e3 n122}
+}
+
+node n126 {
+    type router
+    model mdr
+    network-config {
+	hostname n126
+	!
+	interface eth0
+	 ipv6 address 2001:25::1/128
+	 ip address 10.0.25.1/24
+	!
+    }
+    canvas c1
+    iconcoords {654.0 296.0}
+    labelcoords {654.0 328.0}
+    interface-peer {eth0 n130}
+}
+
+node n127 {
+    type router
+    model mdr
+    network-config {
+	hostname n127
+	!
+	interface eth0
+	 ipv6 address 2001:25::3/128
+	 ip address 10.0.25.3/24
+	!
+    }
+    canvas c1
+    iconcoords {657.0 345.0}
+    labelcoords {657.0 377.0}
+    interface-peer {eth0 n130}
+}
+
+node n128 {
+    type router
+    model mdr
+    network-config {
+	hostname n128
+	!
+	interface eth0
+	 ipv6 address 2001:25::4/128
+	 ip address 10.0.25.4/24
+	!
+    }
+    canvas c1
+    iconcoords {708.0 353.0}
+    labelcoords {708.0 385.0}
+    interface-peer {eth0 n130}
+}
+
+node n129 {
+    type router
+    model mdr
+    network-config {
+	hostname n129
+	!
+	interface eth0
+	 ipv6 address 2001:25::2/128
+	 ip address 10.0.25.2/24
+	!
+    }
+    canvas c1
+    iconcoords {701.0 302.0}
+    labelcoords {701.0 334.0}
+    interface-peer {eth0 n130}
+}
+
+node n130 {
+    type wlan
+    network-config {
+	hostname wlan130
+	!
+	interface wireless
+	 ipv6 address 2001:25::0/128
+	 ip address 10.0.25.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {683.0 321.0}
+    labelcoords {683.0 353.0}
+    interface-peer {e0 n126}
+    interface-peer {e1 n129}
+    interface-peer {e2 n127}
+    interface-peer {e3 n128}
+}
+
+node n131 {
+    type router
+    model mdr
+    network-config {
+	hostname n131
+	!
+	interface eth0
+	 ipv6 address 2001:26::1/128
+	 ip address 10.0.26.1/24
+	!
+    }
+    canvas c1
+    iconcoords {762.0 300.0}
+    labelcoords {762.0 332.0}
+    interface-peer {eth0 n135}
+}
+
+node n132 {
+    type router
+    model mdr
+    network-config {
+	hostname n132
+	!
+	interface eth0
+	 ipv6 address 2001:26::3/128
+	 ip address 10.0.26.3/24
+	!
+    }
+    canvas c1
+    iconcoords {772.0 356.0}
+    labelcoords {772.0 388.0}
+    interface-peer {eth0 n135}
+}
+
+node n133 {
+    type router
+    model mdr
+    network-config {
+	hostname n133
+	!
+	interface eth0
+	 ipv6 address 2001:26::4/128
+	 ip address 10.0.26.4/24
+	!
+    }
+    canvas c1
+    iconcoords {827.0 351.0}
+    labelcoords {827.0 383.0}
+    interface-peer {eth0 n135}
+}
+
+node n134 {
+    type router
+    model mdr
+    network-config {
+	hostname n134
+	!
+	interface eth0
+	 ipv6 address 2001:26::2/128
+	 ip address 10.0.26.2/24
+	!
+    }
+    canvas c1
+    iconcoords {820.0 309.0}
+    labelcoords {820.0 341.0}
+    interface-peer {eth0 n135}
+}
+
+node n135 {
+    type wlan
+    network-config {
+	hostname wlan135
+	!
+	interface wireless
+	 ipv6 address 2001:26::0/128
+	 ip address 10.0.26.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {786.0 321.0}
+    labelcoords {786.0 353.0}
+    interface-peer {e0 n131}
+    interface-peer {e1 n134}
+    interface-peer {e2 n132}
+    interface-peer {e3 n133}
+}
+
+node n136 {
+    type router
+    model mdr
+    network-config {
+	hostname n136
+	!
+	interface eth0
+	 ipv6 address 2001:27::1/128
+	 ip address 10.0.27.1/24
+	!
+    }
+    canvas c1
+    iconcoords {879.0 310.0}
+    labelcoords {879.0 342.0}
+    interface-peer {eth0 n140}
+}
+
+node n137 {
+    type router
+    model mdr
+    network-config {
+	hostname n137
+	!
+	interface eth0
+	 ipv6 address 2001:27::3/128
+	 ip address 10.0.27.3/24
+	!
+    }
+    canvas c1
+    iconcoords {890.0 369.0}
+    labelcoords {890.0 401.0}
+    interface-peer {eth0 n140}
+}
+
+node n138 {
+    type router
+    model mdr
+    network-config {
+	hostname n138
+	!
+	interface eth0
+	 ipv6 address 2001:27::4/128
+	 ip address 10.0.27.4/24
+	!
+    }
+    canvas c1
+    iconcoords {950.0 368.0}
+    labelcoords {950.0 400.0}
+    interface-peer {eth0 n140}
+}
+
+node n139 {
+    type router
+    model mdr
+    network-config {
+	hostname n139
+	!
+	interface eth0
+	 ipv6 address 2001:27::2/128
+	 ip address 10.0.27.2/24
+	!
+    }
+    canvas c1
+    iconcoords {940.0 313.0}
+    labelcoords {940.0 345.0}
+    interface-peer {eth0 n140}
+}
+
+node n140 {
+    type wlan
+    network-config {
+	hostname wlan140
+	!
+	interface wireless
+	 ipv6 address 2001:27::0/128
+	 ip address 10.0.27.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {909.0 339.0}
+    labelcoords {909.0 371.0}
+    interface-peer {e0 n136}
+    interface-peer {e1 n139}
+    interface-peer {e2 n137}
+    interface-peer {e3 n138}
+}
+
+node n141 {
+    type router
+    model mdr
+    network-config {
+	hostname n141
+	!
+	interface eth0
+	 ipv6 address 2001:28::1/128
+	 ip address 10.0.28.1/24
+	!
+    }
+    canvas c1
+    iconcoords {1008.0 302.0}
+    labelcoords {1008.0 334.0}
+    interface-peer {eth0 n145}
+}
+
+node n142 {
+    type router
+    model mdr
+    network-config {
+	hostname n142
+	!
+	interface eth0
+	 ipv6 address 2001:28::3/128
+	 ip address 10.0.28.3/24
+	!
+    }
+    canvas c1
+    iconcoords {1014.0 362.0}
+    labelcoords {1014.0 394.0}
+    interface-peer {eth0 n145}
+}
+
+node n143 {
+    type router
+    model mdr
+    network-config {
+	hostname n143
+	!
+	interface eth0
+	 ipv6 address 2001:28::4/128
+	 ip address 10.0.28.4/24
+	!
+    }
+    canvas c1
+    iconcoords {1079.0 366.0}
+    labelcoords {1079.0 398.0}
+    interface-peer {eth0 n145}
+}
+
+node n144 {
+    type router
+    model mdr
+    network-config {
+	hostname n144
+	!
+	interface eth0
+	 ipv6 address 2001:28::2/128
+	 ip address 10.0.28.2/24
+	!
+    }
+    canvas c1
+    iconcoords {1065.0 300.0}
+    labelcoords {1065.0 332.0}
+    interface-peer {eth0 n145}
+}
+
+node n145 {
+    type wlan
+    network-config {
+	hostname wlan145
+	!
+	interface wireless
+	 ipv6 address 2001:28::0/128
+	 ip address 10.0.28.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1038.0 336.0}
+    labelcoords {1038.0 368.0}
+    interface-peer {e0 n141}
+    interface-peer {e1 n144}
+    interface-peer {e2 n142}
+    interface-peer {e3 n143}
+}
+
+node n146 {
+    type router
+    model mdr
+    network-config {
+	hostname n146
+	!
+	interface eth0
+	 ipv6 address 2001:29::1/128
+	 ip address 10.0.29.1/24
+	!
+    }
+    canvas c1
+    iconcoords {1127.0 308.0}
+    labelcoords {1127.0 340.0}
+    interface-peer {eth0 n150}
+}
+
+node n147 {
+    type router
+    model mdr
+    network-config {
+	hostname n147
+	!
+	interface eth0
+	 ipv6 address 2001:29::3/128
+	 ip address 10.0.29.3/24
+	!
+    }
+    canvas c1
+    iconcoords {1131.0 365.0}
+    labelcoords {1131.0 397.0}
+    interface-peer {eth0 n150}
+}
+
+node n148 {
+    type router
+    model mdr
+    network-config {
+	hostname n148
+	!
+	interface eth0
+	 ipv6 address 2001:29::4/128
+	 ip address 10.0.29.4/24
+	!
+    }
+    canvas c1
+    iconcoords {1178.0 361.0}
+    labelcoords {1178.0 393.0}
+    interface-peer {eth0 n150}
+}
+
+node n149 {
+    type router
+    model mdr
+    network-config {
+	hostname n149
+	!
+	interface eth0
+	 ipv6 address 2001:29::2/128
+	 ip address 10.0.29.2/24
+	!
+    }
+    canvas c1
+    iconcoords {1171.0 311.0}
+    labelcoords {1171.0 343.0}
+    interface-peer {eth0 n150}
+}
+
+node n150 {
+    type wlan
+    network-config {
+	hostname wlan150
+	!
+	interface wireless
+	 ipv6 address 2001:29::0/128
+	 ip address 10.0.29.0/24
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1147.0 339.0}
+    labelcoords {1147.0 371.0}
+    interface-peer {e0 n146}
+    interface-peer {e1 n149}
+    interface-peer {e2 n147}
+    interface-peer {e3 n148}
+}
+
+node n103 {
+    type router
+    model mdr
+    network-config {
+	hostname n103
+	!
+	interface eth0
+	 ip address 10.0.20.4/24
+	 ipv6 address 2001:20::4/128
+	!
+    }
+    canvas c1
+    iconcoords {106.0 339.0}
+    labelcoords {106.0 371.0}
+    interface-peer {eth0 n105}
+}
+
+node n151 {
+    type router
+    model mdr
+    network-config {
+	hostname n151
+	!
+	interface eth0
+	 ip address 10.0.30.1/24
+	 ipv6 address 2001:19::1/128
+	!
+    }
+    canvas c1
+    iconcoords {46.0 395.0}
+    labelcoords {46.0 427.0}
+    interface-peer {eth0 n155}
+}
+
+node n152 {
+    type router
+    model mdr
+    network-config {
+	hostname n152
+	!
+	interface eth0
+	 ip address 10.0.30.3/24
+	 ipv6 address 2001:19::3/128
+	!
+    }
+    canvas c1
+    iconcoords {48.0 453.0}
+    labelcoords {48.0 485.0}
+    interface-peer {eth0 n155}
+}
+
+node n153 {
+    type router
+    model mdr
+    network-config {
+	hostname n153
+	!
+	interface eth0
+	 ip address 10.0.30.4/24
+	 ipv6 address 2001:19::4/128
+	!
+    }
+    canvas c1
+    iconcoords {108.0 458.0}
+    labelcoords {108.0 490.0}
+    interface-peer {eth0 n155}
+}
+
+node n154 {
+    type router
+    model mdr
+    network-config {
+	hostname n154
+	!
+	interface eth0
+	 ip address 10.0.30.2/24
+	 ipv6 address 2001:19::2/128
+	!
+    }
+    canvas c1
+    iconcoords {105.0 402.0}
+    labelcoords {105.0 434.0}
+    interface-peer {eth0 n155}
+}
+
+node n155 {
+    type wlan
+    network-config {
+	hostname wlan155
+	!
+	interface wireless
+	 ip address 10.0.30.0/24
+	 ipv6 address 2001:19::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {71.0 434.0}
+    labelcoords {71.0 466.0}
+    interface-peer {e0 n151}
+    interface-peer {e1 n154}
+    interface-peer {e2 n152}
+    interface-peer {e3 n153}
+}
+
+node n156 {
+    type router
+    model mdr
+    network-config {
+	hostname n156
+	!
+	interface eth0
+	 ip address 10.0.31.1/24
+	 ipv6 address 2001:30::1/128
+	!
+    }
+    canvas c1
+    iconcoords {167.0 401.0}
+    labelcoords {167.0 433.0}
+    interface-peer {eth0 n160}
+}
+
+node n157 {
+    type router
+    model mdr
+    network-config {
+	hostname n157
+	!
+	interface eth0
+	 ip address 10.0.31.3/24
+	 ipv6 address 2001:30::3/128
+	!
+    }
+    canvas c1
+    iconcoords {169.0 457.0}
+    labelcoords {169.0 489.0}
+    interface-peer {eth0 n160}
+}
+
+node n158 {
+    type router
+    model mdr
+    network-config {
+	hostname n158
+	!
+	interface eth0
+	 ip address 10.0.31.4/24
+	 ipv6 address 2001:30::4/128
+	!
+    }
+    canvas c1
+    iconcoords {227.0 455.0}
+    labelcoords {227.0 487.0}
+    interface-peer {eth0 n160}
+}
+
+node n159 {
+    type router
+    model mdr
+    network-config {
+	hostname n159
+	!
+	interface eth0
+	 ip address 10.0.31.2/24
+	 ipv6 address 2001:30::2/128
+	!
+    }
+    canvas c1
+    iconcoords {224.0 402.0}
+    labelcoords {224.0 434.0}
+    interface-peer {eth0 n160}
+}
+
+node n160 {
+    type wlan
+    network-config {
+	hostname wlan160
+	!
+	interface wireless
+	 ip address 10.0.31.0/24
+	 ipv6 address 2001:30::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {201.0 440.0}
+    labelcoords {201.0 472.0}
+    interface-peer {e0 n156}
+    interface-peer {e1 n159}
+    interface-peer {e2 n157}
+    interface-peer {e3 n158}
+}
+
+node n161 {
+    type router
+    model mdr
+    network-config {
+	hostname n161
+	!
+	interface eth0
+	 ip address 10.0.32.1/24
+	 ipv6 address 2001:31::1/128
+	!
+    }
+    canvas c1
+    iconcoords {295.0 401.0}
+    labelcoords {295.0 433.0}
+    interface-peer {eth0 n165}
+}
+
+node n162 {
+    type router
+    model mdr
+    network-config {
+	hostname n162
+	!
+	interface eth0
+	 ip address 10.0.32.3/24
+	 ipv6 address 2001:31::3/128
+	!
+    }
+    canvas c1
+    iconcoords {293.0 457.0}
+    labelcoords {293.0 489.0}
+    interface-peer {eth0 n165}
+}
+
+node n163 {
+    type router
+    model mdr
+    network-config {
+	hostname n163
+	!
+	interface eth0
+	 ip address 10.0.32.4/24
+	 ipv6 address 2001:31::4/128
+	!
+    }
+    canvas c1
+    iconcoords {347.0 459.0}
+    labelcoords {347.0 491.0}
+    interface-peer {eth0 n165}
+}
+
+node n164 {
+    type router
+    model mdr
+    network-config {
+	hostname n164
+	!
+	interface eth0
+	 ip address 10.0.32.2/24
+	 ipv6 address 2001:31::2/128
+	!
+    }
+    canvas c1
+    iconcoords {349.0 408.0}
+    labelcoords {349.0 440.0}
+    interface-peer {eth0 n165}
+}
+
+node n165 {
+    type wlan
+    network-config {
+	hostname wlan165
+	!
+	interface wireless
+	 ip address 10.0.32.0/24
+	 ipv6 address 2001:31::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {322.0 441.0}
+    labelcoords {331.0 475.0}
+    interface-peer {e0 n161}
+    interface-peer {e1 n164}
+    interface-peer {e2 n162}
+    interface-peer {e3 n163}
+}
+
+node n166 {
+    type router
+    model mdr
+    network-config {
+	hostname n166
+	!
+	interface eth0
+	 ip address 10.0.33.1/24
+	 ipv6 address 2001:32::1/128
+	!
+    }
+    canvas c1
+    iconcoords {408.0 412.0}
+    labelcoords {408.0 444.0}
+    interface-peer {eth0 n170}
+}
+
+node n167 {
+    type router
+    model mdr
+    network-config {
+	hostname n167
+	!
+	interface eth0
+	 ip address 10.0.33.3/24
+	 ipv6 address 2001:32::3/128
+	!
+    }
+    canvas c1
+    iconcoords {412.0 453.0}
+    labelcoords {412.0 485.0}
+    interface-peer {eth0 n170}
+}
+
+node n168 {
+    type router
+    model mdr
+    network-config {
+	hostname n168
+	!
+	interface eth0
+	 ip address 10.0.33.4/24
+	 ipv6 address 2001:32::4/128
+	!
+    }
+    canvas c1
+    iconcoords {470.0 461.0}
+    labelcoords {470.0 493.0}
+    interface-peer {eth0 n170}
+}
+
+node n169 {
+    type router
+    model mdr
+    network-config {
+	hostname n169
+	!
+	interface eth0
+	 ip address 10.0.33.2/24
+	 ipv6 address 2001:32::2/128
+	!
+    }
+    canvas c1
+    iconcoords {464.0 409.0}
+    labelcoords {464.0 441.0}
+    interface-peer {eth0 n170}
+}
+
+node n170 {
+    type wlan
+    network-config {
+	hostname wlan170
+	!
+	interface wireless
+	 ip address 10.0.33.0/24
+	 ipv6 address 2001:32::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {441.0 436.0}
+    labelcoords {441.0 468.0}
+    interface-peer {e0 n166}
+    interface-peer {e1 n169}
+    interface-peer {e2 n167}
+    interface-peer {e3 n168}
+}
+
+node n171 {
+    type router
+    model mdr
+    network-config {
+	hostname n171
+	!
+	interface eth0
+	 ip address 10.0.34.1/24
+	 ipv6 address 2001:33::1/128
+	!
+    }
+    canvas c1
+    iconcoords {535.0 416.0}
+    labelcoords {535.0 448.0}
+    interface-peer {eth0 n175}
+}
+
+node n172 {
+    type router
+    model mdr
+    network-config {
+	hostname n172
+	!
+	interface eth0
+	 ip address 10.0.34.3/24
+	 ipv6 address 2001:33::3/128
+	!
+    }
+    canvas c1
+    iconcoords {539.0 463.0}
+    labelcoords {539.0 495.0}
+    interface-peer {eth0 n175}
+}
+
+node n173 {
+    type router
+    model mdr
+    network-config {
+	hostname n173
+	!
+	interface eth0
+	 ip address 10.0.34.4/24
+	 ipv6 address 2001:33::4/128
+	!
+    }
+    canvas c1
+    iconcoords {582.0 464.0}
+    labelcoords {582.0 496.0}
+    interface-peer {eth0 n175}
+}
+
+node n174 {
+    type router
+    model mdr
+    network-config {
+	hostname n174
+	!
+	interface eth0
+	 ip address 10.0.34.2/24
+	 ipv6 address 2001:33::2/128
+	!
+    }
+    canvas c1
+    iconcoords {587.0 417.0}
+    labelcoords {587.0 449.0}
+    interface-peer {eth0 n175}
+}
+
+node n175 {
+    type wlan
+    network-config {
+	hostname wlan175
+	!
+	interface wireless
+	 ip address 10.0.34.0/24
+	 ipv6 address 2001:33::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {555.0 439.0}
+    labelcoords {555.0 471.0}
+    interface-peer {e0 n171}
+    interface-peer {e1 n174}
+    interface-peer {e2 n172}
+    interface-peer {e3 n173}
+}
+
+node n176 {
+    type router
+    model mdr
+    network-config {
+	hostname n176
+	!
+	interface eth0
+	 ip address 10.0.35.1/24
+	 ipv6 address 2001:34::1/128
+	!
+    }
+    canvas c1
+    iconcoords {646.0 416.0}
+    labelcoords {646.0 448.0}
+    interface-peer {eth0 n180}
+}
+
+node n177 {
+    type router
+    model mdr
+    network-config {
+	hostname n177
+	!
+	interface eth0
+	 ip address 10.0.35.3/24
+	 ipv6 address 2001:34::3/128
+	!
+    }
+    canvas c1
+    iconcoords {650.0 461.0}
+    labelcoords {650.0 493.0}
+    interface-peer {eth0 n180}
+}
+
+node n178 {
+    type router
+    model mdr
+    network-config {
+	hostname n178
+	!
+	interface eth0
+	 ip address 10.0.35.4/24
+	 ipv6 address 2001:34::4/128
+	!
+    }
+    canvas c1
+    iconcoords {707.0 471.0}
+    labelcoords {707.0 503.0}
+    interface-peer {eth0 n180}
+}
+
+node n179 {
+    type router
+    model mdr
+    network-config {
+	hostname n179
+	!
+	interface eth0
+	 ip address 10.0.35.2/24
+	 ipv6 address 2001:34::2/128
+	!
+    }
+    canvas c1
+    iconcoords {698.0 420.0}
+    labelcoords {698.0 452.0}
+    interface-peer {eth0 n180}
+}
+
+node n180 {
+    type wlan
+    network-config {
+	hostname wlan180
+	!
+	interface wireless
+	 ip address 10.0.35.0/24
+	 ipv6 address 2001:34::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {680.0 449.0}
+    labelcoords {680.0 481.0}
+    interface-peer {e0 n176}
+    interface-peer {e1 n179}
+    interface-peer {e2 n177}
+    interface-peer {e3 n178}
+}
+
+node n181 {
+    type router
+    model mdr
+    network-config {
+	hostname n181
+	!
+	interface eth0
+	 ip address 10.0.36.1/24
+	 ipv6 address 2001:35::1/128
+	!
+    }
+    canvas c1
+    iconcoords {764.0 419.0}
+    labelcoords {764.0 451.0}
+    interface-peer {eth0 n185}
+}
+
+node n182 {
+    type router
+    model mdr
+    network-config {
+	hostname n182
+	!
+	interface eth0
+	 ip address 10.0.36.3/24
+	 ipv6 address 2001:35::3/128
+	!
+    }
+    canvas c1
+    iconcoords {765.0 469.0}
+    labelcoords {765.0 501.0}
+    interface-peer {eth0 n185}
+}
+
+node n183 {
+    type router
+    model mdr
+    network-config {
+	hostname n183
+	!
+	interface eth0
+	 ip address 10.0.36.4/24
+	 ipv6 address 2001:35::4/128
+	!
+    }
+    canvas c1
+    iconcoords {824.0 473.0}
+    labelcoords {824.0 505.0}
+    interface-peer {eth0 n185}
+}
+
+node n184 {
+    type router
+    model mdr
+    network-config {
+	hostname n184
+	!
+	interface eth0
+	 ip address 10.0.36.2/24
+	 ipv6 address 2001:35::2/128
+	!
+    }
+    canvas c1
+    iconcoords {825.0 422.0}
+    labelcoords {825.0 454.0}
+    interface-peer {eth0 n185}
+}
+
+node n185 {
+    type wlan
+    network-config {
+	hostname wlan185
+	!
+	interface wireless
+	 ip address 10.0.36.0/24
+	 ipv6 address 2001:35::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {793.0 454.0}
+    labelcoords {796.0 481.0}
+    interface-peer {e0 n181}
+    interface-peer {e1 n184}
+    interface-peer {e2 n182}
+    interface-peer {e3 n183}
+}
+
+node n186 {
+    type router
+    model mdr
+    network-config {
+	hostname n186
+	!
+	interface eth0
+	 ip address 10.0.37.1/24
+	 ipv6 address 2001:36::1/128
+	!
+    }
+    canvas c1
+    iconcoords {893.0 428.0}
+    labelcoords {893.0 460.0}
+    interface-peer {eth0 n190}
+}
+
+node n187 {
+    type router
+    model mdr
+    network-config {
+	hostname n187
+	!
+	interface eth0
+	 ip address 10.0.37.3/24
+	 ipv6 address 2001:36::3/128
+	!
+    }
+    canvas c1
+    iconcoords {892.0 478.0}
+    labelcoords {892.0 510.0}
+    interface-peer {eth0 n190}
+}
+
+node n188 {
+    type router
+    model mdr
+    network-config {
+	hostname n188
+	!
+	interface eth0
+	 ip address 10.0.37.4/24
+	 ipv6 address 2001:36::4/128
+	!
+    }
+    canvas c1
+    iconcoords {954.0 482.0}
+    labelcoords {954.0 514.0}
+    interface-peer {eth0 n190}
+}
+
+node n189 {
+    type router
+    model mdr
+    network-config {
+	hostname n189
+	!
+	interface eth0
+	 ip address 10.0.37.2/24
+	 ipv6 address 2001:36::2/128
+	!
+    }
+    canvas c1
+    iconcoords {950.0 434.0}
+    labelcoords {950.0 466.0}
+    interface-peer {eth0 n190}
+}
+
+node n190 {
+    type wlan
+    network-config {
+	hostname wlan190
+	!
+	interface wireless
+	 ip address 10.0.37.0/24
+	 ipv6 address 2001:36::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {913.0 464.0}
+    labelcoords {920.0 487.0}
+    interface-peer {e0 n186}
+    interface-peer {e1 n189}
+    interface-peer {e2 n187}
+    interface-peer {e3 n188}
+}
+
+node n191 {
+    type router
+    model mdr
+    network-config {
+	hostname n191
+	!
+	interface eth0
+	 ip address 10.0.38.1/24
+	 ipv6 address 2001:37::1/128
+	!
+    }
+    canvas c1
+    iconcoords {1013.0 432.0}
+    labelcoords {1013.0 464.0}
+    interface-peer {eth0 n195}
+}
+
+node n192 {
+    type router
+    model mdr
+    network-config {
+	hostname n192
+	!
+	interface eth0
+	 ip address 10.0.38.3/24
+	 ipv6 address 2001:37::3/128
+	!
+    }
+    canvas c1
+    iconcoords {1011.0 483.0}
+    labelcoords {1011.0 515.0}
+    interface-peer {eth0 n195}
+}
+
+node n193 {
+    type router
+    model mdr
+    network-config {
+	hostname n193
+	!
+	interface eth0
+	 ip address 10.0.38.4/24
+	 ipv6 address 2001:37::4/128
+	!
+    }
+    canvas c1
+    iconcoords {1075.0 480.0}
+    labelcoords {1075.0 512.0}
+    interface-peer {eth0 n195}
+}
+
+node n194 {
+    type router
+    model mdr
+    network-config {
+	hostname n194
+	!
+	interface eth0
+	 ip address 10.0.38.2/24
+	 ipv6 address 2001:37::2/128
+	!
+    }
+    canvas c1
+    iconcoords {1071.0 437.0}
+    labelcoords {1071.0 469.0}
+    interface-peer {eth0 n195}
+}
+
+node n195 {
+    type wlan
+    network-config {
+	hostname wlan195
+	!
+	interface wireless
+	 ip address 10.0.38.0/24
+	 ipv6 address 2001:37::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1038.0 471.0}
+    labelcoords {1038.0 503.0}
+    interface-peer {e0 n191}
+    interface-peer {e1 n194}
+    interface-peer {e2 n192}
+    interface-peer {e3 n193}
+}
+
+node n196 {
+    type router
+    model mdr
+    network-config {
+	hostname n196
+	!
+	interface eth0
+	 ip address 10.0.39.1/24
+	 ipv6 address 2001:38::1/128
+	!
+    }
+    canvas c1
+    iconcoords {1122.0 430.0}
+    labelcoords {1122.0 462.0}
+    interface-peer {eth0 n200}
+}
+
+node n197 {
+    type router
+    model mdr
+    network-config {
+	hostname n197
+	!
+	interface eth0
+	 ip address 10.0.39.3/24
+	 ipv6 address 2001:38::3/128
+	!
+    }
+    canvas c1
+    iconcoords {1125.0 484.0}
+    labelcoords {1125.0 516.0}
+    interface-peer {eth0 n200}
+}
+
+node n198 {
+    type router
+    model mdr
+    network-config {
+	hostname n198
+	!
+	interface eth0
+	 ip address 10.0.39.4/24
+	 ipv6 address 2001:38::4/128
+	!
+    }
+    canvas c1
+    iconcoords {1177.0 482.0}
+    labelcoords {1177.0 514.0}
+    interface-peer {eth0 n200}
+}
+
+node n199 {
+    type router
+    model mdr
+    network-config {
+	hostname n199
+	!
+	interface eth0
+	 ip address 10.0.39.2/24
+	 ipv6 address 2001:38::2/128
+	!
+    }
+    canvas c1
+    iconcoords {1180.0 433.0}
+    labelcoords {1180.0 465.0}
+    interface-peer {eth0 n200}
+}
+
+node n200 {
+    type wlan
+    network-config {
+	hostname wlan200
+	!
+	interface wireless
+	 ip address 10.0.39.0/24
+	 ipv6 address 2001:38::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1149.0 470.0}
+    labelcoords {1149.0 502.0}
+    interface-peer {e0 n196}
+    interface-peer {e1 n199}
+    interface-peer {e2 n197}
+    interface-peer {e3 n198}
+}
+
+node n201 {
+    type router
+    model mdr
+    network-config {
+	hostname n201
+	!
+	interface eth0
+	 ip address 10.0.40.1/24
+	 ipv6 address 2001:39::1/128
+	!
+    }
+    canvas c1
+    iconcoords {46.0 527.0}
+    labelcoords {46.0 559.0}
+    interface-peer {eth0 n205}
+}
+
+node n202 {
+    type router
+    model mdr
+    network-config {
+	hostname n202
+	!
+	interface eth0
+	 ip address 10.0.40.3/24
+	 ipv6 address 2001:39::3/128
+	!
+    }
+    canvas c1
+    iconcoords {45.0 572.0}
+    labelcoords {45.0 604.0}
+    interface-peer {eth0 n205}
+}
+
+node n203 {
+    type router
+    model mdr
+    network-config {
+	hostname n203
+	!
+	interface eth0
+	 ip address 10.0.40.4/24
+	 ipv6 address 2001:39::4/128
+	!
+    }
+    canvas c1
+    iconcoords {105.0 577.0}
+    labelcoords {105.0 609.0}
+    interface-peer {eth0 n205}
+}
+
+node n204 {
+    type router
+    model mdr
+    network-config {
+	hostname n204
+	!
+	interface eth0
+	 ip address 10.0.40.2/24
+	 ipv6 address 2001:39::2/128
+	!
+    }
+    canvas c1
+    iconcoords {113.0 526.0}
+    labelcoords {113.0 558.0}
+    interface-peer {eth0 n205}
+}
+
+node n205 {
+    type wlan
+    network-config {
+	hostname wlan205
+	!
+	interface wireless
+	 ip address 10.0.40.0/24
+	 ipv6 address 2001:39::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {83.0 551.0}
+    labelcoords {83.0 583.0}
+    interface-peer {e0 n201}
+    interface-peer {e1 n204}
+    interface-peer {e2 n202}
+    interface-peer {e3 n203}
+}
+
+node n206 {
+    type router
+    model mdr
+    network-config {
+	hostname n206
+	!
+	interface eth0
+	 ip address 10.0.41.1/24
+	 ipv6 address 2001:40::1/128
+	!
+    }
+    canvas c1
+    iconcoords {176.0 530.0}
+    labelcoords {176.0 562.0}
+    interface-peer {eth0 n210}
+}
+
+node n207 {
+    type router
+    model mdr
+    network-config {
+	hostname n207
+	!
+	interface eth0
+	 ip address 10.0.41.3/24
+	 ipv6 address 2001:40::3/128
+	!
+    }
+    canvas c1
+    iconcoords {179.0 570.0}
+    labelcoords {179.0 602.0}
+    interface-peer {eth0 n210}
+}
+
+node n208 {
+    type router
+    model mdr
+    network-config {
+	hostname n208
+	!
+	interface eth0
+	 ip address 10.0.41.4/24
+	 ipv6 address 2001:40::4/128
+	!
+    }
+    canvas c1
+    iconcoords {231.0 578.0}
+    labelcoords {231.0 610.0}
+    interface-peer {eth0 n210}
+}
+
+node n209 {
+    type router
+    model mdr
+    network-config {
+	hostname n209
+	!
+	interface eth0
+	 ip address 10.0.41.2/24
+	 ipv6 address 2001:40::2/128
+	!
+    }
+    canvas c1
+    iconcoords {229.0 531.0}
+    labelcoords {229.0 563.0}
+    interface-peer {eth0 n210}
+}
+
+node n210 {
+    type wlan
+    network-config {
+	hostname wlan210
+	!
+	interface wireless
+	 ip address 10.0.41.0/24
+	 ipv6 address 2001:40::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {206.0 559.0}
+    labelcoords {206.0 591.0}
+    interface-peer {e0 n206}
+    interface-peer {e1 n209}
+    interface-peer {e2 n207}
+    interface-peer {e3 n208}
+}
+
+node n211 {
+    type router
+    model mdr
+    network-config {
+	hostname n211
+	!
+	interface eth0
+	 ip address 10.0.42.1/24
+	 ipv6 address 2001:41::1/128
+	!
+    }
+    canvas c1
+    iconcoords {288.0 530.0}
+    labelcoords {288.0 562.0}
+    interface-peer {eth0 n215}
+}
+
+node n212 {
+    type router
+    model mdr
+    network-config {
+	hostname n212
+	!
+	interface eth0
+	 ip address 10.0.42.3/24
+	 ipv6 address 2001:41::3/128
+	!
+    }
+    canvas c1
+    iconcoords {287.0 584.0}
+    labelcoords {287.0 616.0}
+    interface-peer {eth0 n215}
+}
+
+node n213 {
+    type router
+    model mdr
+    network-config {
+	hostname n213
+	!
+	interface eth0
+	 ip address 10.0.42.4/24
+	 ipv6 address 2001:41::4/128
+	!
+    }
+    canvas c1
+    iconcoords {336.0 589.0}
+    labelcoords {336.0 621.0}
+    interface-peer {eth0 n215}
+}
+
+node n214 {
+    type router
+    model mdr
+    network-config {
+	hostname n214
+	!
+	interface eth0
+	 ip address 10.0.42.2/24
+	 ipv6 address 2001:41::2/128
+	!
+    }
+    canvas c1
+    iconcoords {341.0 534.0}
+    labelcoords {341.0 566.0}
+    interface-peer {eth0 n215}
+}
+
+node n215 {
+    type wlan
+    network-config {
+	hostname wlan215
+	!
+	interface wireless
+	 ip address 10.0.42.0/24
+	 ipv6 address 2001:41::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {309.0 560.0}
+    labelcoords {309.0 592.0}
+    interface-peer {e0 n211}
+    interface-peer {e1 n214}
+    interface-peer {e2 n212}
+    interface-peer {e3 n213}
+}
+
+node n216 {
+    type router
+    model mdr
+    network-config {
+	hostname n216
+	!
+	interface eth0
+	 ip address 10.0.43.1/24
+	 ipv6 address 2001:42::1/128
+	!
+    }
+    canvas c1
+    iconcoords {403.0 526.0}
+    labelcoords {403.0 558.0}
+    interface-peer {eth0 n220}
+}
+
+node n217 {
+    type router
+    model mdr
+    network-config {
+	hostname n217
+	!
+	interface eth0
+	 ip address 10.0.43.3/24
+	 ipv6 address 2001:42::3/128
+	!
+    }
+    canvas c1
+    iconcoords {409.0 577.0}
+    labelcoords {409.0 609.0}
+    interface-peer {eth0 n220}
+}
+
+node n218 {
+    type router
+    model mdr
+    network-config {
+	hostname n218
+	!
+	interface eth0
+	 ip address 10.0.43.4/24
+	 ipv6 address 2001:42::4/128
+	!
+    }
+    canvas c1
+    iconcoords {469.0 582.0}
+    labelcoords {469.0 614.0}
+    interface-peer {eth0 n220}
+}
+
+node n219 {
+    type router
+    model mdr
+    network-config {
+	hostname n219
+	!
+	interface eth0
+	 ip address 10.0.43.2/24
+	 ipv6 address 2001:42::2/128
+	!
+    }
+    canvas c1
+    iconcoords {459.0 529.0}
+    labelcoords {459.0 561.0}
+    interface-peer {eth0 n220}
+}
+
+node n220 {
+    type wlan
+    network-config {
+	hostname wlan220
+	!
+	interface wireless
+	 ip address 10.0.43.0/24
+	 ipv6 address 2001:42::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {438.0 567.0}
+    labelcoords {438.0 599.0}
+    interface-peer {e0 n216}
+    interface-peer {e1 n219}
+    interface-peer {e2 n217}
+    interface-peer {e3 n218}
+}
+
+node n221 {
+    type router
+    model mdr
+    network-config {
+	hostname n221
+	!
+	interface eth0
+	 ip address 10.0.44.1/24
+	 ipv6 address 2001:43::1/128
+	!
+    }
+    canvas c1
+    iconcoords {523.0 529.0}
+    labelcoords {523.0 561.0}
+    interface-peer {eth0 n225}
+}
+
+node n222 {
+    type router
+    model mdr
+    network-config {
+	hostname n222
+	!
+	interface eth0
+	 ip address 10.0.44.3/24
+	 ipv6 address 2001:43::3/128
+	!
+    }
+    canvas c1
+    iconcoords {531.0 581.0}
+    labelcoords {531.0 613.0}
+    interface-peer {eth0 n225}
+}
+
+node n223 {
+    type router
+    model mdr
+    network-config {
+	hostname n223
+	!
+	interface eth0
+	 ip address 10.0.44.4/24
+	 ipv6 address 2001:43::4/128
+	!
+    }
+    canvas c1
+    iconcoords {593.0 582.0}
+    labelcoords {593.0 614.0}
+    interface-peer {eth0 n225}
+}
+
+node n224 {
+    type router
+    model mdr
+    network-config {
+	hostname n224
+	!
+	interface eth0
+	 ip address 10.0.44.2/24
+	 ipv6 address 2001:43::2/128
+	!
+    }
+    canvas c1
+    iconcoords {587.0 528.0}
+    labelcoords {587.0 560.0}
+    interface-peer {eth0 n225}
+}
+
+node n225 {
+    type wlan
+    network-config {
+	hostname wlan225
+	!
+	interface wireless
+	 ip address 10.0.44.0/24
+	 ipv6 address 2001:43::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {562.0 563.0}
+    labelcoords {562.0 595.0}
+    interface-peer {e0 n221}
+    interface-peer {e1 n224}
+    interface-peer {e2 n222}
+    interface-peer {e3 n223}
+}
+
+node n226 {
+    type router
+    model mdr
+    network-config {
+	hostname n226
+	!
+	interface eth0
+	 ip address 10.0.45.1/24
+	 ipv6 address 2001:44::1/128
+	!
+    }
+    canvas c1
+    iconcoords {646.0 529.0}
+    labelcoords {646.0 561.0}
+    interface-peer {eth0 n230}
+}
+
+node n227 {
+    type router
+    model mdr
+    network-config {
+	hostname n227
+	!
+	interface eth0
+	 ip address 10.0.45.3/24
+	 ipv6 address 2001:44::3/128
+	!
+    }
+    canvas c1
+    iconcoords {657.0 582.0}
+    labelcoords {657.0 614.0}
+    interface-peer {eth0 n230}
+}
+
+node n228 {
+    type router
+    model mdr
+    network-config {
+	hostname n228
+	!
+	interface eth0
+	 ip address 10.0.45.4/24
+	 ipv6 address 2001:44::4/128
+	!
+    }
+    canvas c1
+    iconcoords {709.0 583.0}
+    labelcoords {709.0 615.0}
+    interface-peer {eth0 n230}
+}
+
+node n229 {
+    type router
+    model mdr
+    network-config {
+	hostname n229
+	!
+	interface eth0
+	 ip address 10.0.45.2/24
+	 ipv6 address 2001:44::2/128
+	!
+    }
+    canvas c1
+    iconcoords {705.0 534.0}
+    labelcoords {705.0 566.0}
+    interface-peer {eth0 n230}
+}
+
+node n230 {
+    type wlan
+    network-config {
+	hostname wlan230
+	!
+	interface wireless
+	 ip address 10.0.45.0/24
+	 ipv6 address 2001:44::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {676.0 561.0}
+    labelcoords {676.0 593.0}
+    interface-peer {e0 n226}
+    interface-peer {e1 n229}
+    interface-peer {e2 n227}
+    interface-peer {e3 n228}
+}
+
+node n231 {
+    type router
+    model mdr
+    network-config {
+	hostname n231
+	!
+	interface eth0
+	 ip address 10.0.46.1/24
+	 ipv6 address 2001:45::1/128
+	!
+    }
+    canvas c1
+    iconcoords {778.0 532.0}
+    labelcoords {778.0 564.0}
+    interface-peer {eth0 n235}
+}
+
+node n232 {
+    type router
+    model mdr
+    network-config {
+	hostname n232
+	!
+	interface eth0
+	 ip address 10.0.46.3/24
+	 ipv6 address 2001:45::3/128
+	!
+    }
+    canvas c1
+    iconcoords {782.0 586.0}
+    labelcoords {782.0 618.0}
+    interface-peer {eth0 n235}
+}
+
+node n233 {
+    type router
+    model mdr
+    network-config {
+	hostname n233
+	!
+	interface eth0
+	 ip address 10.0.46.4/24
+	 ipv6 address 2001:45::4/128
+	!
+    }
+    canvas c1
+    iconcoords {834.0 592.0}
+    labelcoords {834.0 624.0}
+    interface-peer {eth0 n235}
+}
+
+node n234 {
+    type router
+    model mdr
+    network-config {
+	hostname n234
+	!
+	interface eth0
+	 ip address 10.0.46.2/24
+	 ipv6 address 2001:45::2/128
+	!
+    }
+    canvas c1
+    iconcoords {839.0 535.0}
+    labelcoords {839.0 567.0}
+    interface-peer {eth0 n235}
+}
+
+node n235 {
+    type wlan
+    network-config {
+	hostname wlan235
+	!
+	interface wireless
+	 ip address 10.0.46.0/24
+	 ipv6 address 2001:45::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {810.0 560.0}
+    labelcoords {810.0 592.0}
+    interface-peer {e0 n231}
+    interface-peer {e1 n234}
+    interface-peer {e2 n232}
+    interface-peer {e3 n233}
+}
+
+node n236 {
+    type router
+    model mdr
+    network-config {
+	hostname n236
+	!
+	interface eth0
+	 ip address 10.0.47.1/24
+	 ipv6 address 2001:46::1/128
+	!
+    }
+    canvas c1
+    iconcoords {901.0 538.0}
+    labelcoords {901.0 570.0}
+    interface-peer {eth0 n240}
+}
+
+node n237 {
+    type router
+    model mdr
+    network-config {
+	hostname n237
+	!
+	interface eth0
+	 ip address 10.0.47.3/24
+	 ipv6 address 2001:46::3/128
+	!
+    }
+    canvas c1
+    iconcoords {905.0 586.0}
+    labelcoords {905.0 618.0}
+    interface-peer {eth0 n240}
+}
+
+node n238 {
+    type router
+    model mdr
+    network-config {
+	hostname n238
+	!
+	interface eth0
+	 ip address 10.0.47.4/24
+	 ipv6 address 2001:46::4/128
+	!
+    }
+    canvas c1
+    iconcoords {954.0 593.0}
+    labelcoords {954.0 625.0}
+    interface-peer {eth0 n240}
+}
+
+node n239 {
+    type router
+    model mdr
+    network-config {
+	hostname n239
+	!
+	interface eth0
+	 ip address 10.0.47.2/24
+	 ipv6 address 2001:46::2/128
+	!
+    }
+    canvas c1
+    iconcoords {948.0 545.0}
+    labelcoords {948.0 577.0}
+    interface-peer {eth0 n240}
+}
+
+node n240 {
+    type wlan
+    network-config {
+	hostname wlan240
+	!
+	interface wireless
+	 ip address 10.0.47.0/24
+	 ipv6 address 2001:46::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {924.0 564.0}
+    labelcoords {924.0 596.0}
+    interface-peer {e0 n236}
+    interface-peer {e1 n239}
+    interface-peer {e2 n237}
+    interface-peer {e3 n238}
+}
+
+node n241 {
+    type router
+    model mdr
+    network-config {
+	hostname n241
+	!
+	interface eth0
+	 ip address 10.0.48.1/24
+	 ipv6 address 2001:47::1/128
+	!
+    }
+    canvas c1
+    iconcoords {1016.0 540.0}
+    labelcoords {1016.0 572.0}
+    interface-peer {eth0 n245}
+}
+
+node n242 {
+    type router
+    model mdr
+    network-config {
+	hostname n242
+	!
+	interface eth0
+	 ip address 10.0.48.3/24
+	 ipv6 address 2001:47::3/128
+	!
+    }
+    canvas c1
+    iconcoords {1017.0 587.0}
+    labelcoords {1017.0 619.0}
+    interface-peer {eth0 n245}
+}
+
+node n243 {
+    type router
+    model mdr
+    network-config {
+	hostname n243
+	!
+	interface eth0
+	 ip address 10.0.48.4/24
+	 ipv6 address 2001:47::4/128
+	!
+    }
+    canvas c1
+    iconcoords {1073.0 592.0}
+    labelcoords {1073.0 624.0}
+    interface-peer {eth0 n245}
+}
+
+node n244 {
+    type router
+    model mdr
+    network-config {
+	hostname n244
+	!
+	interface eth0
+	 ip address 10.0.48.2/24
+	 ipv6 address 2001:47::2/128
+	!
+    }
+    canvas c1
+    iconcoords {1074.0 534.0}
+    labelcoords {1074.0 566.0}
+    interface-peer {eth0 n245}
+}
+
+node n245 {
+    type wlan
+    network-config {
+	hostname wlan245
+	!
+	interface wireless
+	 ip address 10.0.48.0/24
+	 ipv6 address 2001:47::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1045.0 563.0}
+    labelcoords {1045.0 595.0}
+    interface-peer {e0 n241}
+    interface-peer {e1 n244}
+    interface-peer {e2 n242}
+    interface-peer {e3 n243}
+}
+
+node n246 {
+    type router
+    model mdr
+    network-config {
+	hostname n246
+	!
+	interface eth0
+	 ip address 10.0.49.1/24
+	 ipv6 address 2001:48::1/128
+	!
+    }
+    canvas c1
+    iconcoords {1133.0 547.0}
+    labelcoords {1133.0 579.0}
+    interface-peer {eth0 n250}
+}
+
+node n247 {
+    type router
+    model mdr
+    network-config {
+	hostname n247
+	!
+	interface eth0
+	 ip address 10.0.49.3/24
+	 ipv6 address 2001:48::3/128
+	!
+    }
+    canvas c1
+    iconcoords {1133.0 595.0}
+    labelcoords {1133.0 627.0}
+    interface-peer {eth0 n250}
+}
+
+node n248 {
+    type router
+    model mdr
+    network-config {
+	hostname n248
+	!
+	interface eth0
+	 ip address 10.0.49.4/24
+	 ipv6 address 2001:48::4/128
+	!
+    }
+    canvas c1
+    iconcoords {1179.0 597.0}
+    labelcoords {1179.0 629.0}
+    interface-peer {eth0 n250}
+}
+
+node n249 {
+    type router
+    model mdr
+    network-config {
+	hostname n249
+	!
+	interface eth0
+	 ip address 10.0.49.2/24
+	 ipv6 address 2001:48::2/128
+	!
+    }
+    canvas c1
+    iconcoords {1178.0 543.0}
+    labelcoords {1178.0 575.0}
+    interface-peer {eth0 n250}
+}
+
+node n250 {
+    type wlan
+    network-config {
+	hostname wlan250
+	!
+	interface wireless
+	 ip address 10.0.49.0/24
+	 ipv6 address 2001:48::0/128
+	!
+	mobmodel
+	coreapi
+	basic_range
+	!
+    }
+    custom-config {
+	custom-config-id basic_range
+	custom-command {3 3 9 9 9}
+	config {
+	range=275
+	bandwidth=54000000
+	jitter=0
+	delay=20000
+	error=0
+	}
+    }
+    canvas c1
+    iconcoords {1160.0 574.0}
+    labelcoords {1160.0 606.0}
+    interface-peer {e0 n246}
+    interface-peer {e1 n249}
+    interface-peer {e2 n247}
+    interface-peer {e3 n248}
+}
+
+link l1 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n5 n1}
+}
+
+link l2 {
+    delay 20000
+    nodes {n5 n2}
+    bandwidth 54000000
+}
+
+link l3 {
+    delay 20000
+    nodes {n5 n3}
+    bandwidth 54000000
+}
+
+link l4 {
+    delay 20000
+    nodes {n5 n4}
+    bandwidth 54000000
+}
+
+link l5 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n10 n6}
+}
+
+link l6 {
+    delay 20000
+    nodes {n10 n7}
+    bandwidth 54000000
+}
+
+link l7 {
+    delay 20000
+    nodes {n10 n8}
+    bandwidth 54000000
+}
+
+link l8 {
+    delay 20000
+    nodes {n10 n9}
+    bandwidth 54000000
+}
+
+link l9 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n15 n11}
+}
+
+link l10 {
+    delay 20000
+    nodes {n15 n12}
+    bandwidth 54000000
+}
+
+link l11 {
+    delay 20000
+    nodes {n15 n13}
+    bandwidth 54000000
+}
+
+link l12 {
+    delay 20000
+    nodes {n15 n14}
+    bandwidth 54000000
+}
+
+link l13 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n20 n16}
+}
+
+link l14 {
+    delay 20000
+    nodes {n20 n17}
+    bandwidth 54000000
+}
+
+link l15 {
+    delay 20000
+    nodes {n20 n18}
+    bandwidth 54000000
+}
+
+link l16 {
+    delay 20000
+    nodes {n20 n19}
+    bandwidth 54000000
+}
+
+link l17 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n25 n21}
+}
+
+link l18 {
+    delay 20000
+    nodes {n25 n22}
+    bandwidth 54000000
+}
+
+link l19 {
+    delay 20000
+    nodes {n25 n23}
+    bandwidth 54000000
+}
+
+link l20 {
+    delay 20000
+    nodes {n25 n24}
+    bandwidth 54000000
+}
+
+link l21 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n30 n26}
+}
+
+link l22 {
+    delay 20000
+    nodes {n30 n27}
+    bandwidth 54000000
+}
+
+link l23 {
+    delay 20000
+    nodes {n30 n28}
+    bandwidth 54000000
+}
+
+link l24 {
+    delay 20000
+    nodes {n30 n29}
+    bandwidth 54000000
+}
+
+link l25 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n35 n31}
+}
+
+link l26 {
+    delay 20000
+    nodes {n35 n32}
+    bandwidth 54000000
+}
+
+link l27 {
+    delay 20000
+    nodes {n35 n33}
+    bandwidth 54000000
+}
+
+link l28 {
+    delay 20000
+    nodes {n35 n34}
+    bandwidth 54000000
+}
+
+link l29 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n40 n36}
+}
+
+link l30 {
+    delay 20000
+    nodes {n40 n37}
+    bandwidth 54000000
+}
+
+link l31 {
+    delay 20000
+    nodes {n40 n38}
+    bandwidth 54000000
+}
+
+link l32 {
+    delay 20000
+    nodes {n40 n39}
+    bandwidth 54000000
+}
+
+link l33 {
+    delay 20000
+    bandwidth 54000000
+    nodes {n45 n41}
+}
+
+link l34 {
+    delay 20000
+    nodes {n45 n42}
+    bandwidth 54000000
+}
+
+link l35 {
+    delay 20000
+    nodes {n45 n43}
+    bandwidth 54000000
+}
+
+link l36 {
+    delay 20000
+    nodes {n45 n44}
+    bandwidth 54000000
+}
+
+link l37 {
+    nodes {n50 n46}
+}
+
+link l38 {
+    nodes {n50 n47}
+}
+
+link l39 {
+    nodes {n50 n48}
+}
+
+link l40 {
+    nodes {n50 n49}
+}
+
+link l41 {
+    nodes {n55 n51}
+}
+
+link l42 {
+    nodes {n55 n54}
+}
+
+link l43 {
+    nodes {n55 n52}
+}
+
+link l44 {
+    nodes {n55 n53}
+}
+
+link l45 {
+    nodes {n60 n56}
+}
+
+link l46 {
+    nodes {n60 n59}
+}
+
+link l47 {
+    nodes {n60 n57}
+}
+
+link l48 {
+    nodes {n60 n58}
+}
+
+link l49 {
+    nodes {n65 n61}
+}
+
+link l50 {
+    nodes {n65 n64}
+}
+
+link l51 {
+    nodes {n65 n62}
+}
+
+link l52 {
+    nodes {n65 n63}
+}
+
+link l53 {
+    nodes {n70 n66}
+}
+
+link l54 {
+    nodes {n70 n69}
+}
+
+link l55 {
+    nodes {n70 n67}
+}
+
+link l56 {
+    nodes {n70 n68}
+}
+
+link l57 {
+    nodes {n75 n71}
+}
+
+link l58 {
+    nodes {n75 n74}
+}
+
+link l59 {
+    nodes {n75 n72}
+}
+
+link l60 {
+    nodes {n75 n73}
+}
+
+link l61 {
+    nodes {n80 n76}
+}
+
+link l62 {
+    nodes {n80 n79}
+}
+
+link l63 {
+    nodes {n80 n77}
+}
+
+link l64 {
+    nodes {n80 n78}
+}
+
+link l65 {
+    nodes {n85 n81}
+}
+
+link l66 {
+    nodes {n85 n84}
+}
+
+link l67 {
+    nodes {n85 n82}
+}
+
+link l68 {
+    nodes {n85 n83}
+}
+
+link l69 {
+    nodes {n90 n86}
+}
+
+link l70 {
+    nodes {n90 n89}
+}
+
+link l71 {
+    nodes {n90 n87}
+}
+
+link l72 {
+    nodes {n90 n88}
+}
+
+link l73 {
+    nodes {n95 n91}
+}
+
+link l74 {
+    nodes {n95 n94}
+}
+
+link l75 {
+    nodes {n95 n92}
+}
+
+link l76 {
+    nodes {n95 n93}
+}
+
+link l77 {
+    nodes {n100 n96}
+}
+
+link l78 {
+    nodes {n100 n99}
+}
+
+link l79 {
+    nodes {n100 n98}
+}
+
+link l80 {
+    nodes {n100 n97}
+}
+
+link l82 {
+    nodes {n105 n101}
+}
+
+link l83 {
+    nodes {n105 n104}
+}
+
+link l84 {
+    nodes {n105 n102}
+}
+
+link l86 {
+    nodes {n110 n106}
+}
+
+link l87 {
+    nodes {n110 n109}
+}
+
+link l88 {
+    nodes {n110 n108}
+}
+
+link l89 {
+    nodes {n110 n107}
+}
+
+link l90 {
+    nodes {n115 n111}
+}
+
+link l91 {
+    nodes {n115 n114}
+}
+
+link l92 {
+    nodes {n115 n112}
+}
+
+link l93 {
+    nodes {n115 n113}
+}
+
+link l94 {
+    nodes {n120 n116}
+}
+
+link l95 {
+    nodes {n120 n119}
+}
+
+link l96 {
+    nodes {n120 n117}
+}
+
+link l97 {
+    nodes {n120 n118}
+}
+
+link l98 {
+    nodes {n125 n121}
+}
+
+link l99 {
+    nodes {n125 n124}
+}
+
+link l100 {
+    nodes {n125 n123}
+}
+
+link l101 {
+    nodes {n125 n122}
+}
+
+link l102 {
+    nodes {n130 n126}
+}
+
+link l103 {
+    nodes {n130 n129}
+}
+
+link l104 {
+    nodes {n130 n127}
+}
+
+link l105 {
+    nodes {n130 n128}
+}
+
+link l106 {
+    nodes {n135 n131}
+}
+
+link l107 {
+    nodes {n135 n134}
+}
+
+link l108 {
+    nodes {n135 n132}
+}
+
+link l109 {
+    nodes {n135 n133}
+}
+
+link l110 {
+    nodes {n140 n136}
+}
+
+link l111 {
+    nodes {n140 n139}
+}
+
+link l112 {
+    nodes {n140 n137}
+}
+
+link l113 {
+    nodes {n140 n138}
+}
+
+link l114 {
+    nodes {n145 n141}
+}
+
+link l115 {
+    nodes {n145 n144}
+}
+
+link l116 {
+    nodes {n145 n142}
+}
+
+link l117 {
+    nodes {n145 n143}
+}
+
+link l118 {
+    nodes {n150 n146}
+}
+
+link l119 {
+    nodes {n150 n149}
+}
+
+link l120 {
+    nodes {n150 n147}
+}
+
+link l121 {
+    nodes {n150 n148}
+}
+
+link l81 {
+    nodes {n105 n103}
+}
+
+link l85 {
+    nodes {n155 n151}
+}
+
+link l122 {
+    nodes {n155 n154}
+}
+
+link l123 {
+    nodes {n155 n152}
+}
+
+link l124 {
+    nodes {n155 n153}
+}
+
+link l125 {
+    nodes {n160 n156}
+}
+
+link l126 {
+    nodes {n160 n159}
+}
+
+link l127 {
+    nodes {n160 n157}
+}
+
+link l128 {
+    nodes {n160 n158}
+}
+
+link l129 {
+    nodes {n165 n161}
+}
+
+link l130 {
+    nodes {n165 n164}
+}
+
+link l131 {
+    nodes {n165 n162}
+}
+
+link l132 {
+    nodes {n165 n163}
+}
+
+link l133 {
+    nodes {n170 n166}
+}
+
+link l134 {
+    nodes {n170 n169}
+}
+
+link l135 {
+    nodes {n170 n167}
+}
+
+link l136 {
+    nodes {n170 n168}
+}
+
+link l137 {
+    nodes {n175 n171}
+}
+
+link l138 {
+    nodes {n175 n174}
+}
+
+link l139 {
+    nodes {n175 n172}
+}
+
+link l140 {
+    nodes {n175 n173}
+}
+
+link l141 {
+    nodes {n180 n176}
+}
+
+link l142 {
+    nodes {n180 n179}
+}
+
+link l143 {
+    nodes {n180 n177}
+}
+
+link l144 {
+    nodes {n180 n178}
+}
+
+link l145 {
+    nodes {n185 n181}
+}
+
+link l146 {
+    nodes {n185 n184}
+}
+
+link l147 {
+    nodes {n185 n182}
+}
+
+link l148 {
+    nodes {n185 n183}
+}
+
+link l149 {
+    nodes {n190 n186}
+}
+
+link l150 {
+    nodes {n190 n189}
+}
+
+link l151 {
+    nodes {n190 n187}
+}
+
+link l152 {
+    nodes {n190 n188}
+}
+
+link l153 {
+    nodes {n195 n191}
+}
+
+link l154 {
+    nodes {n195 n194}
+}
+
+link l155 {
+    nodes {n195 n192}
+}
+
+link l156 {
+    nodes {n195 n193}
+}
+
+link l157 {
+    nodes {n200 n196}
+}
+
+link l158 {
+    nodes {n200 n199}
+}
+
+link l159 {
+    nodes {n200 n197}
+}
+
+link l160 {
+    nodes {n200 n198}
+}
+
+link l161 {
+    nodes {n205 n201}
+}
+
+link l162 {
+    nodes {n205 n204}
+}
+
+link l163 {
+    nodes {n205 n202}
+}
+
+link l164 {
+    nodes {n205 n203}
+}
+
+link l165 {
+    nodes {n210 n206}
+}
+
+link l166 {
+    nodes {n210 n209}
+}
+
+link l167 {
+    nodes {n210 n207}
+}
+
+link l168 {
+    nodes {n210 n208}
+}
+
+link l169 {
+    nodes {n215 n211}
+}
+
+link l170 {
+    nodes {n215 n214}
+}
+
+link l171 {
+    nodes {n215 n212}
+}
+
+link l172 {
+    nodes {n215 n213}
+}
+
+link l173 {
+    nodes {n220 n216}
+}
+
+link l174 {
+    nodes {n220 n219}
+}
+
+link l175 {
+    nodes {n220 n217}
+}
+
+link l176 {
+    nodes {n220 n218}
+}
+
+link l177 {
+    nodes {n225 n221}
+}
+
+link l178 {
+    nodes {n225 n224}
+}
+
+link l179 {
+    nodes {n225 n222}
+}
+
+link l180 {
+    nodes {n225 n223}
+}
+
+link l181 {
+    nodes {n230 n226}
+}
+
+link l182 {
+    nodes {n230 n229}
+}
+
+link l183 {
+    nodes {n230 n227}
+}
+
+link l184 {
+    nodes {n230 n228}
+}
+
+link l185 {
+    nodes {n235 n231}
+}
+
+link l186 {
+    nodes {n235 n234}
+}
+
+link l187 {
+    nodes {n235 n232}
+}
+
+link l188 {
+    nodes {n235 n233}
+}
+
+link l189 {
+    nodes {n240 n236}
+}
+
+link l190 {
+    nodes {n240 n239}
+}
+
+link l191 {
+    nodes {n240 n237}
+}
+
+link l192 {
+    nodes {n240 n238}
+}
+
+link l193 {
+    nodes {n245 n241}
+}
+
+link l194 {
+    nodes {n245 n244}
+}
+
+link l195 {
+    nodes {n245 n242}
+}
+
+link l196 {
+    nodes {n245 n243}
+}
+
+link l197 {
+    nodes {n250 n246}
+}
+
+link l198 {
+    nodes {n250 n249}
+}
+
+link l199 {
+    nodes {n250 n247}
+}
+
+link l200 {
+    nodes {n250 n248}
+}
+
+canvas c1 {
+    name {Canvas1}
+    refpt {0 0 47.5791667 -122.132322 2.0}
+    scale {150.0}
+    size {1200 750}
+}
+
+option global {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses no
+    node_labels yes
+    link_labels yes
+    show_api no
+    background_images no
+    annotations yes
+    grid yes
+    traffic_start 0
+}
+
+option session {
+    controlnet=172.16.0.0/16
+    controlnet_updown_script=
+    enablerj45=1
+    enablesdt=0
+    preservedir=0
+    sdturl=tcp://127.0.0.1:50000/
+}
+
