@@ -61,15 +61,15 @@ class StrategyMultiDFS(Strategy):
 
 		if mouse.canGoLeft() and not isVisited[(mouse.x-1, mouse.y)]:
 			path.append([mouse.x, mouse.y])
-			isVisited[(mouse.x, mouse.y+1)] = 1
+			isVisited[(mouse.x-1, mouse.y)] = 1
 			mouse.goLeft()
 		elif mouse.canGoUp() and not isVisited[(mouse.x, mouse.y-1)]:
 			path.append([mouse.x, mouse.y])
-			isVisited[(mouse.x, mouse.y+1)] = 1
+			isVisited[(mouse.x, mouse.y-1)] = 1
 			mouse.goUp()
 		elif mouse.canGoRight() and not isVisited[(mouse.x+1, mouse.y)]:
 			path.append([mouse.x, mouse.y])
-			isVisited[(mouse.x, mouse.y+1)] = 1
+			isVisited[(mouse.x+1, mouse.y)] = 1
 			mouse.goRight()
 		elif mouse.canGoDown() and not isVisited[(mouse.x, mouse.y+1)]:
 			path.append([mouse.x, mouse.y])
