@@ -14,6 +14,7 @@ h1 {
 
 canvas#maze {
 	border : inset;
+	margin-top: 10px;
 	width: 480px;
 	height: 480px;
 }
@@ -23,19 +24,15 @@ canvas#maze {
 	height: auto;
 }
 
+#code_div{
+	margin-top: 10px;
+}
+
 #maze_controls_div {
 	text-align: center;
 	margin: 0 auto;
 	padding: 20px;
 	width: 100%
-}
-
-#select_maze_div {
-	padding-top: 10px;
-}
-
-#select_code_div {
-	padding-top: 10px;
 }
 
 #msg_div {

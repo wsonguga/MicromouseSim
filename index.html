@@ -9,124 +9,124 @@
     <link rel="stylesheet" href="main.css" type="text/css">
     <meta name="google-signin-client_id" content="151801924080-lp4ab32de5jh8u79po2f8ajqhmkjpkgf.apps.googleusercontent.com">
 
+    <link rel="stylesheet" href="bootstrap-select.css" type="text/css">
+
     <title>Micromouse Algorithm Simulator</title>
 </head>
 <body>
-    <h1 class="text-center">Micromouse Algorithm Simulator</h1>
-
+    
+    <div class="jumbotron">
+      <h1 class="">Micromouse Algorithm Simulator</h1>
+      <p class="lead">This web-based Micromouse Algorithm Simulator provides a platform to run and test your own algorithm using the Micromouse framework written in Python.
+        <br>You need to sign in by your Google account and write the strategy code on the right side and click "Download" and "Run".
+        <br>You can also use different map on the left side.
+      </p>
+      <hr class="my-4">
+      <a class="btn btn-primary btn-lg" href="http://www.tcp4me.com/mmr/mazes/" role="button">Map Example</a>
+      <a class="btn btn-primary btn-lg" href="https://eniacluo.github.io/Micromouse/guide/tutorial.html" role="button">Framework Tutorial</a>
+      <a class="btn btn-primary btn-lg" href="https://eniacluo.github.io/Micromouse/modules/docs.html" role="button">API Documentation</a>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+    <script src="bootstrap-select.js"></script>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div style="display: inline-block;">
-                    <h3><a href="http://www.tcp4me.com/mmr/mazes/">Map</a></h3>
-                </div>
-                <div id="select_maze_div" style="display: inline-block; margin-left: 305px;">
-                    <select name="maze_sel" id="maze_sel">
-                      <option value="00japan">00japan</option>
-                      <option value="11rbgames">11rbgames</option>
-                      <option value="1stworld">1stworld</option>
-                      <option value="80japx">80japx</option>
-                      <option value="81japx">81japx</option>
-                      <option value="82japx">82japx</option>
-                      <option value="82us">82us</option>
-                      <option value="82japx">82japx</option>
-                      <option value="83japx">83japx</option>
-                      <option value="83us">83us</option>
-                      <option value="84japx">84japx</option>
-                      <option value="85japx">85japx</option>
-                      <option value="85usa">85usa</option>
-                      <option value="86">86</option>
-                      <option value="86chi">86chi</option>
-                      <option value="86jap">86jap</option>
-                      <option value="86japx">86japx</option>
-                      <option value="87iee">87iee</option>
-                      <option value="87jap">87jap</option>
-                      <option value="87japx">87japx</option>
-                      <option value="87sin">87sin</option>
-                      <option value="87us1">87us1</option>
-                      <option value="88iee">88iee</option>
-                      <option value="88jap">88jap</option>
-                      <option value="88japx">88japx</option>
-                      <option value="88lon">88lon</option>
-                      <option value="88mtl">88mtl</option>
-                      <option value="88sin">88sin</option>
-                      <option value="88us">88us</option>
-                      <option value="89ape">89ape</option>
-                      <option value="89iee">89iee</option>
-                      <option value="89japa1">89japa1</option>
-                      <option value="89japa2">89japa2</option>
-                      <option value="89japx">89japx</option>
-                      <option value="89lon">89lon</option>
-                      <option value="89lonq">89lonq</option>
-                      <option value="89sina1">89sina1</option>
-                      <option value="90japx">90japx</option>
-                      <option value="90lon">90lon</option>
-                      <option value="90lonq">90lonq</option>
-                      <option value="90tor">90tor</option>
-                      <option value="91hon">91hon</option>
-                      <option value="91japa1">91japa1</option>
-                      <option value="91japq">91japq</option>
-                      <option value="91japx">91japx</option>
-                      <option value="91lon">91lon</option>
-                      <option value="91tor">91tor</option>
-                      <option value="92bos">92bos</option>
-                      <option value="92japx">92japx</option>
-                      <option value="92lon">92lon</option>
-                      <option value="92lonq">92lonq</option>
-                      <option value="93apec">93apec</option>
-                      <option value="93japx">93japx</option>
-                      <option value="94beam1">94beam1</option>
-                      <option value="94beam2">94beam2</option>
-                      <option value="94japan">94japan</option>
-                      <option value="94japx">94japx</option>
-                      <option value="95japx">95japx</option>
-                      <option value="96japx">96japx</option>
-                      <option value="97japx">97japx</option>
-                      <option value="j1">j1</option>
-                      <option value="j2">j2</option>
-                      <option value="j3">j3</option>
-                      <option value="j4">j4</option>
-                      <option value="j5">j5</option>
-                      <option value="j6">j6</option>
-                      <option value="loop">loop</option>
-                      <option value="museum">museum</option>
-                      <option value="test1">test1</option>
-                      <option value="zigzag">zigzag</option>
-                      <option value="blank">blank</option>
-                      <option value="west_wall">west_wall</option>
-                    </select>
-                </div>
+                <select class="selectpicker" name="maze_sel" id="maze_sel">
+                  <option value="00japan">00japan</option>
+                  <option value="11rbgames">11rbgames</option>
+                  <option value="1stworld">1stworld</option>
+                  <option value="80japx">80japx</option>
+                  <option value="81japx">81japx</option>
+                  <option value="82japx">82japx</option>
+                  <option value="82us">82us</option>
+                  <option value="82japx">82japx</option>
+                  <option value="83japx">83japx</option>
+                  <option value="83us">83us</option>
+                  <option value="84japx">84japx</option>
+                  <option value="85japx">85japx</option>
+                  <option value="85usa">85usa</option>
+                  <option value="86">86</option>
+                  <option value="86chi">86chi</option>
+                  <option value="86jap">86jap</option>
+                  <option value="86japx">86japx</option>
+                  <option value="87iee">87iee</option>
+                  <option value="87jap">87jap</option>
+                  <option value="87japx">87japx</option>
+                  <option value="87sin">87sin</option>
+                  <option value="87us1">87us1</option>
+                  <option value="88iee">88iee</option>
+                  <option value="88jap">88jap</option>
+                  <option value="88japx">88japx</option>
+                  <option value="88lon">88lon</option>
+                  <option value="88mtl">88mtl</option>
+                  <option value="88sin">88sin</option>
+                  <option value="88us">88us</option>
+                  <option value="89ape">89ape</option>
+                  <option value="89iee">89iee</option>
+                  <option value="89japa1">89japa1</option>
+                  <option value="89japa2">89japa2</option>
+                  <option value="89japx">89japx</option>
+                  <option value="89lon">89lon</option>
+                  <option value="89lonq">89lonq</option>
+                  <option value="89sina1">89sina1</option>
+                  <option value="90japx">90japx</option>
+                  <option value="90lon">90lon</option>
+                  <option value="90lonq">90lonq</option>
+                  <option value="90tor">90tor</option>
+                  <option value="91hon">91hon</option>
+                  <option value="91japa1">91japa1</option>
+                  <option value="91japq">91japq</option>
+                  <option value="91japx">91japx</option>
+                  <option value="91lon">91lon</option>
+                  <option value="91tor">91tor</option>
+                  <option value="92bos">92bos</option>
+                  <option value="92japx">92japx</option>
+                  <option value="92lon">92lon</option>
+                  <option value="92lonq">92lonq</option>
+                  <option value="93apec">93apec</option>
+                  <option value="93japx">93japx</option>
+                  <option value="94beam1">94beam1</option>
+                  <option value="94beam2">94beam2</option>
+                  <option value="94japan">94japan</option>
+                  <option value="94japx">94japx</option>
+                  <option value="95japx">95japx</option>
+                  <option value="96japx">96japx</option>
+                  <option value="97japx">97japx</option>
+                  <option value="j1">j1</option>
+                  <option value="j2">j2</option>
+                  <option value="j3">j3</option>
+                  <option value="j4">j4</option>
+                  <option value="j5">j5</option>
+                  <option value="j6">j6</option>
+                  <option value="loop">loop</option>
+                  <option value="museum">museum</option>
+                  <option value="test1">test1</option>
+                  <option value="zigzag">zigzag</option>
+                  <option value="blank">blank</option>
+                  <option value="west_wall">west_wall</option>
+                </select>
+                <canvas id="maze" width="480" height="480"> </canvas>
             </div>
             
-            <div class="col-md-6">
-                <h3><a href="https://eniacluo.github.io/Micromouse/modules/docs.html">Strategy Code</a></h3>
-            </div>
-            <div id="select_code_div" class="col-md-2">
-                <div class="text-right">
-                    <select name="driver_sel" id="driver_sel" >
-                        <option value="multidfs" selected="selected">MultiDFS</option>
-                        <option value="blank">Blank</option>
-                    </select>
+            <div class="col-md-8">
+                <select name="driver_sel" id="driver_sel" class="selectpicker" >
+                    <option value="multidfs" selected="selected">MultiDFS</option>
+                    <option value="blank">Blank</option>
+                </select>
+                <div id="code_div">
+                    <form>
+                        <textarea id="driver_codemirror" rows=10></textarea>
+                        <textarea id="driver_code" style="display:none;" rows=10></textarea>
+                    </form>
                 </div>
             </div>
         </div>
-    <div class="row">
-        <div id="maze_div" class="col-md-4">
-          <canvas id="maze" width="480" height="480"> </canvas>
-        </div>
-        <div id="code_div" class="col-md-8" >
-            <form>
-                <textarea id="driver_codemirror" rows=10></textarea>
-                <textarea id="driver_code" style="display:none;" rows=10></textarea>
-            </form>
-        </div>
-    </div>
 <div id="maze_controls_div">
     <form>
         <div id = "gsignin" class="g-signin2" data-onsuccess="onSignIn"></div>
@@ -144,7 +144,10 @@
     <button id = "showerror" class="btn btn-primary" type="button">Show Error</button>
 </div>
 <p id = "errorPython"></p>
-
+  <div class="text-center py-3">
+    <hr class="my-4">
+    <p id = "power">Powered by Zhiwei Luo<br><a href="http://sensorweb.engr.uga.edu">Sensorweb Research Laboratory</a><br>University of Gerogia</p>
+  </div>
 </div>
 </body>
 <script type="text/javascript" src="maze.js"></script>
