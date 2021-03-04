@@ -46,4 +46,71 @@ enjoy,
 
 Zhiwei Luo <eniacsimon@gmail.com>
 
+Setting up MicromouseSim on Server
+Tutorial for Ubuntu 14.04 LTS only.
+
+Install packages.
+
+	$ sudo apt-get update
+	$ sudo apt-get install mysql-server
+
+Enter the mysql root password: sensorweb!@#
+
+	$ sudo apt-get install git apache2 php5 php5-mysqlnd python3-pip
+	$ sudo pip3 install mysql-connector-python
+	$ sudo service apache2 restart
+	Deploy to the server.
+	$ git clone https://github.com/eniacluo/MicromouseSim.git
+	$ sudo cp -r MicromouseSim /var/www/html/
+
+Configure the database.
+
+	$ mysql -u root -p
+Enter password: sensorweb!@#
+
+mysql>
+
+CREATE DATABASE micromouse;
+USE micromouse;
+CREATE TABLE sessions(
+	id int auto_increment,
+	userId varchar(100) NOT NULL,
+	sessionId int,
+	status varchar(20) DEFAULT 'dead',
+	PRIMARY KEY (id)
+);
+CREATE TABLE robots(
+	id int auto_increment,
+	session_id int NOT NULL,
+	robot_id int NOT NULL,
+	robot_x int DEFAULT 0,
+	robot_y int DEFAULT 0,
+	direction varchar(10) DEFAULT 'up',
+	PRIMARY KEY (id)
+);
+mysql > quit
+Access database from outside the server (CORE)
+
+	$ sudo nano /etc/mysql/my.cnf
+Comment the line that begins with bind-address
+
+	$ sudo /etc/init.d/mysql restart
+
+	$ mysql -u root -p
+Enter password: sensorweb!@#
+
+mysql > grant all privileges on *.* to 'root'@'%' Identified by 'sensorweb!@#';
+
+mysql > quit
+Enable HTTPS for apache2
+https://techexpert.tips/apache/enable-https-apache/ 
+Run prepare.sh to start.
+
+	$ sudo apt-get install core-network
+	$ cd /var/www/html/MicromouseSim/
+	$ sudo ./prepare.sh
+
+
+
+
 
